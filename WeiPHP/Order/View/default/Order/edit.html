@@ -1,0 +1,189 @@
+<extend name="Base/common" />
+<block name="body">
+    <div class="span9 page_message">
+        <section id="contents">
+            <include file="Addons/_nav" />
+            <div class="tab-content">
+                <!-- 表单 -->
+                <form id="form" action="http://ben.com/index.php?s=/addon/Order/Order/edits/edits.html" method="post" class="form-horizontal">
+                    <!-- 基础文档模型 -->
+                    <div id="tab1" class="tab-pane in              tab1">
+                        <div class="form-item cf toggle-nickname">
+                            <label class="item-label">
+                                疗养号<span class="check-tips"></span>
+                            </label>
+                            <div class="controls">
+                            	<input type="hidden"  name="id"  value="<?php echo  $id;?>">
+                                <input type="text" class="text input-large" name="inhospno" value="<?php echo  $inhospno;?>">
+                            </div>
+                        </div>
+					    <div class="form-item cf toggle-city">
+                            <label class="item-label">
+                                姓名<span class="check-tips"></span>
+                            </label>
+                            <div class="controls">
+                                <input type="text" class="text input-large" name="name" value="<?php echo  $name;?>">
+                            </div>
+                        </div>
+                        <div class="form-item cf toggle-sex">
+                            <label class="item-label">
+                                性别<span class="check-tips"></span>
+                            </label>
+                            <div class="controls">
+                                <select name="sex">
+                                    <option value="0" <?php   if($sex=='0'){ echo "selected";}?> class="toggle-data" toggle-data="">女性</option>
+                                    <option value="1"  <?php  if($sex=='1'){ echo "selected";}?>  class="toggle-data" toggle-data="">男性 </option>
+                                </select>
+                            </div>
+                        </div>
+                      
+                        <div class="form-item cf toggle-province">
+                            <label class="item-label">
+                                电话 <span class="check-tips"></span>
+                            </label>
+                            <div class="controls">
+                                <input type="text" class="text input-large" name="telphone" value="<?php  echo $telphone;?>">
+                            </div>
+                        </div>
+                        <div class="form-item cf toggle-country">
+                            <label class="item-label">
+                                身份证 <span class="check-tips"></span>
+                            </label>
+                            <div class="controls">
+                                <input type="text" class="text input-large" name="idcard" value="<?php  echo $idcard;?>">
+                            </div>
+                        </div>
+                        <div class="form-item cf toggle-language">
+                            <label class="item-label">
+                                年龄 <span class="check-tips"></span>
+                            </label>
+                            <div class="controls">
+                                <input type="text" class="text input-large" name="age" value="<?php  echo $age;?>">
+                            </div>
+                        </div>
+                        <div class="form-item cf toggle-mobile">
+                            <label class="item-label">
+                                预约套餐 <span class="check-tips"></span>
+                            </label>
+                           <div class="controls">
+                                <select name="yytc">
+                                    <option value="0" <?php   if($yytc=='0'){ echo "selected";}?> class="toggle-data" toggle-data="">基本套餐</option>
+                                    <option value="1"  <?php  if($yytc=='1'){ echo "selected";}?>  class="toggle-data" toggle-data="">A套餐</option>
+                                    <option value="2" <?php   if($yytc=='2'){ echo "selected";}?> class="toggle-data" toggle-data="">B套餐</option>
+                                    <option value="3" <?php   if($yytc=='3'){ echo "selected";}?> class="toggle-data" toggle-data="">C套餐</option>
+									<option value="4" <?php   if($yytc=='4'){ echo "selected";}?> class="toggle-data" toggle-data="">VIP套餐</option>
+
+                                </select>
+                            </div>
+                        </div>
+						
+						 <div class="form-item cf toggle-mobile">
+                            <label class="item-label">
+                               预约套餐 <span class="check-tips"></span>
+                            </label>
+                           <div class="controls">
+                                <?php
+								 $yyadTab = array('妇科疾病筛查','乳腺疾病筛查','心血管辅助检查','骨质疏松相关检查','男性疾病筛查','胃部检查项目','外科新增项目','物理诊断新增项目');
+								 $yyad = trim($yyad);
+								 $yyads = explode(',',$yyad);
+								 foreach($yyads as $keyad=>$valad){
+									if($valad != null){
+										$yyadsNn[] = $valad;
+									}
+								 }
+								foreach($yyadTab as $keyy=>$valuey){
+								
+                                        if(in_array($keyy,$yyadsNn)){
+										
+										
+                                        echo '<input type="checkbox" class="text input-large" name="yyad[]" value="'.$keyy.'"  checked >'.$valuey.'&nbsp;&nbsp;';
+                                        }else{
+                                        echo '<input type="checkbox" class="text input-large" name="yyad[]" value="'.$keyy.'"   >'.$valuey.'&nbsp;&nbsp;';
+                                        }
+									}
+								?>
+
+								
+
+								<!-- <select name="yyad">
+                                    <option value="0"  <?php  if($yyad=='0'){ echo "selected";}?>  class="toggle-data" toggle-data="" selected="">无</option>
+                                    <option value="1" <?php   if($yyad=='1'){ echo "selected";}?> class="toggle-data" toggle-data="">妇科疾病筛查</option>
+                                    <option value="2" <?php   if($yyad=='2'){ echo "selected";}?> class="toggle-data" toggle-data="">乳腺疾病筛查</option>
+									<option value="3" <?php   if($yyad=='3'){ echo "selected";}?> class="toggle-data" toggle-data="">心血管辅助检查</option>
+									<option value="4" <?php   if($yyad=='4'){ echo "selected";}?> class="toggle-data" toggle-data="">骨质疏松相关检查</option>
+									<option value="5" <?php   if($yyad=='4'){ echo "selected";}?> class="toggle-data" toggle-data="">男性疾病筛查</option>
+									<option value="6" <?php   if($yyad=='4'){ echo "selected";}?> class="toggle-data" toggle-data="">胃部检查项目</option>
+									<option value="7" <?php   if($yyad=='4'){ echo "selected";}?> class="toggle-data" toggle-data="">外科新增项目</option>
+									<option value="8" <?php   if($yyad=='4'){ echo "selected";}?> class="toggle-data" toggle-data="">物理诊断新增项目</option>
+                                </select> -->
+                            </div>
+                        </div>
+						
+						
+                     <div class="form-item cf toggle-ctime">
+                    <label class="item-label">
+                                        预约时间                    <span class="check-tips">
+                                            </span></label>
+                    <div class="controls">
+                      <input type="datetime" name="yydata" class="text input-large time" value="<?php  echo $yydata;?>" placeholder="请选择时间">                    </div>
+                  </div>
+                        <div class="form-item cf toggle-experience">
+                            <label class="item-label">
+                                预约人数 <span class="check-tips"></span>
+                            </label>
+                            <div class="controls">
+                                <input type="number" class="text input-medium" name="yysum" value="<?php  echo $yysum;?>">
+                            </div>
+                        </div>
+                    </div>
+                    <div class="form-item cf">
+                       
+                        <input type="submit"  id="submit"  value="确定" target-form="form-horizontal">
+           
+                        </input>
+                    </div>
+                </form>
+            </div>
+            </div>
+        </section>
+    </div>
+</block>
+<block name="script">
+    <link href="__STATIC__/datetimepicker/css/datetimepicker.css?v={:SITE_VERSION}" rel="stylesheet" type="text/css">
+    <php>
+        if(C('COLOR_STYLE')=='blue_color') echo '
+        <link href="__STATIC__/datetimepicker/css/datetimepicker_blue.css?v={:SITE_VERSION}" rel="stylesheet" type="text/css">
+        ';
+    </php>
+    <link href="__STATIC__/datetimepicker/css/dropdown.css?v={:SITE_VERSION}" rel="stylesheet" type="text/css">
+    <script type="text/javascript" src="__STATIC__/datetimepicker/js/bootstrap-datetimepicker.min.js">
+    </script>
+    <script type="text/javascript" src="__STATIC__/datetimepicker/js/locales/bootstrap-datetimepicker.zh-CN.js?v={:SITE_VERSION}" charset="UTF-8">
+    </script>
+    <script type="text/javascript">
+        $('#submit').click(function(){
+            $('#form').submit();
+        });
+        $(function(){
+            $('.time').datetimepicker({
+                format: 'yyyy-mm-dd hh:ii',
+                language: "zh-CN",
+                minView: 2,
+                autoclose: true
+            });
+            $('.date').datetimepicker({
+                format: 'yyyy-mm-dd',
+                language: "zh-CN",
+                minView: 2,
+                autoclose: true
+            });
+            showTab();
+            $('#form select').change(change_event(this));
+            $('#form input[name="radio"]').change(change_event(this));
+            $('#form input[name="checkbox"]').change(change_event(this));
+        });
+        function change_event(obj){
+        
+        }
+    </script>
+</block>

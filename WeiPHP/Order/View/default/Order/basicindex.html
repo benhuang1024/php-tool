@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html lang="zh-cn">
+<head>
+<meta charset="utf-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge"/>
+<meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no"/>
+<title>科室报告</title>
+<link rel="stylesheet" type="text/css" href="Resource/tzj/css/basic_index_1.2.css">
+<style>
+a {				text-transform: none;
+				text-decoration: none;
+				color: #000;
+			}
+			a:hover {
+				text-transform: none;
+				text-decoration: none;
+				color: #000;
+			}
+			* {
+				margin: 0;
+				padding: 0;
+			}
+			body{width:100%;min-height:368px;background:#f3f5f6;font-family:'微软雅黑';}
+			a {
+				text-transform: none;
+				text-decoration: none;
+				color: #000;
+			}
+			a:hover {
+				text-transform: none;
+				text-decoration: none;
+				color: #000;
+			}
+			li {
+				list-style: none;
+			}
+			.content{margin-top:20px;}
+			
+			.checkout li {
+				font-size: 14px;
+				background:#fff;
+				overflow:hidden;
+				float: left;
+				display: block;
+				width: 100%;
+				height: 45px;
+				line-height: 45px;
+				margin-bottom:10px;
+				border-top:1px solid #EAEAEA;
+				border-bottom:1px solid #EAEAEA;
+							
+			}
+			.checkout li a{
+				border-left:4px solid #307fe2;
+				display:inline-block;
+				width:82%;
+				padding:0 10% 0 8%;			
+			}
+			.checkout li a span{
+				float:left;
+				display:inline-block;
+				width:85%;
+				height:45px;
+				color: #2f2f2f;
+				overflow:hidden;
+			}
+			
+			.ico_right_new {
+				
+				display: inline-block;
+				vertical-align: middle;	
+				margin-left: 10%;
+				width: 6px;
+				height: 12px;
+				background: url(/Resource/Ben/img/ico_right_new.png) no-repeat;
+				background-size:contain;
+			}
+</style>
+<script src="public/static/jquery-2.0.3.min.js"></script>
+<script type="text/javascript"src="Resource/tzj/js/order.js"></script>
+<script type="text/javascript">
+$(document).ready(function(){ 
+	
+	
+});
+</script>
+</head>
+<body>
+<div class="content">	
+	<ul class="checkout">
+		<volist name="check" id="vo" >
+		<li><a href={:U("/addon/Order/Order/xx/md/$key")} ><span>{$vo[0]}</span><i class="ico_right_new"></i></a>
+		</li>
+		</volist>
+	</ul>
+</div>
+<div class="clear"></div>
+
+
+
+</div>
+</body>
+</html>

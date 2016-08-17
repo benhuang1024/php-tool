@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="zh-cn">
+<head>
+<title>账号绑定</title>
+<meta charset="utf-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge"/>
+<meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no"/>
+<link rel="stylesheet" type="text/css" href="Resource/tzj/css/order.css">
+<script src="public/static/jquery-2.0.3.min.js"></script>
+<script type="text/javascript"src="Resource/tzj/js/order.js"></script>
+<script type="text/javascript" src="Resource/tzj/js/jquery-1.4.2.min.js"></script>
+<script type="text/javascript">
+$(document).ready(function(){ 
+ 	button_binding();
+});
+</script>
+<script type="text/javascript">
+$(function(){
+	
+	$(".showbox").show(function(){
+		$("#TB_overlayBG").css({
+			display:"block",height:$(document).height()
+		});
+		$(".box").css({
+			left:0+"px",
+			top:150+$(window).scrollTop()+"px",
+			display:"block"
+		});
+	});
+	
+	$(".close").click(function(){
+		$("#TB_overlayBG").css("display","none");
+		$(".box ").css("display","none");
+	});
+	
+})
+</script>
+
+<style type="text/css">
+*{margin:0;padding:0;list-style-type:none;}
+body{font:12px/180% Arial, Helvetica, sans-serif,"宋体";}
+a,img{border:0;}
+a{color:#5e5e5e;text-decoration:none;}
+a:hover{color:#3366cc;text-decoration:underline;}
+/* box */
+.box{position:absolute;width:auto;left:50%;height:auto;z-index:100;background-color:#fff;border:1px #8FA4F5 solid;padding:1px;border-radius: 20px;}
+.box h2{height:25px;font-size:14px;position:relative;padding-left:10px;line-height:25px;color:black;border-bottom: 1px solid #ccc;}
+.box h2 a{position:absolute;right:5px;font-size:18px;color:#fff;}
+.box .mainlist{padding:10px;}
+.box .mainlist li{height:24px;line-height:24px;}
+.box .mainlist li span{margin:0 5px 0 0;font-family:"宋体";font-size:12px;font-weight:400;color:black;}
+#TB_overlayBG{background-color:#666;position:absolute;z-index:99;left:0;top:0;display:none;width:100%;height:100%;opacity:0.5;filter: alpha(opacity=50);-moz-opacity: 0.5;}
+</style>
+</head>
+<body>
+    <div>
+  
+	
+	<div>
+        <div style='height:100%;width:100%;margin-left: auto;margin-right: auto;text-align: center;margin-top:15px'><img src="Resource/tzj/images/logo.png" ></div>
+    </div>
+	<div style="height:30px;border-bottom:1px solid #dadada">
+        
+    </div>
+   
+    
+   </div>
+	<div class="order_ture">
+		<div id="sucess_order"onclick='showInfo("绑定成功");'></div>
+		<div id="faile_order"onclick='showInfo("您的预约失败，请重新预约。","绑定失败");'></div>
+    </div>
+	
+	<p align="center" style="font-size:18px;font-family:微软雅黑;margin:100px;"><a href="javascript:void(0);" class="showbox"><span style='color:white'>消费</span></a></p>
+
+	<div id="TB_overlayBG"></div>
+	<div class="box" style="display:none;text-align:center;">
+		<h2 align="center">绑定失败</h2>
+		<div class="mainlist">
+			<ul>
+				<li>您填写的信息与后台信息不符，请重新填写。<br />
+    如有不清楚的地方，可以拨打我们的客服热线0510-82335000<br /></li>
+                <li></li>
+				<li></li>
+				<li>建议您重新绑定！</li>
+			</ul>
+		</div>
+	</div>
+
+</body>
+</html>

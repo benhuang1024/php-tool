@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html>
+
+	<head>
+		<meta charset="utf-8" />
+		<meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no" />
+		<link rel="stylesheet" type="text/css" href="Resource/tzj/css/cc1.css">
+		 
+		<script src="Resource/tzj/css/jquery-latest.js"></script>
+		<title>综合报告</title>
+		<style>
+		.Bottomv{position:fixed;bottom:0px;width:98%}
+		</style>
+		
+		<script type="text/javascript">
+	
+		
+				$(document).ready(function(){
+					$("#ico1").click(function(){
+					if($("#jls").css('height') == "140px")
+					{
+						$('#jls').css('height','auto');
+						$("#ico1").html("返回");
+						$("#icof").addClass("Bottomv");
+					}
+					else
+					{
+						$('#jls').css('height','140px');
+						$("#ico1").html("查看更多");
+						$("#icof").removeClass("Bottomv");
+					}
+					});
+					});
+				$(document).ready(function(){
+					$("#ico2").click(function(){
+					if($("#suggess").css('height') == "140px")
+					{
+						$('#suggess').css('height','auto');
+						$("#ico2").html("返回");
+						$("#icof2").addClass("Bottomv");
+					}
+					else
+					{
+						$('#suggess').css('height','140px');
+						$("#ico2").html("查看更多");
+						$("#icof2").removeClass("Bottomv");
+					}
+					});
+					});
+			 
+	
+		
+       </script>
+  
+	</head>
+   
+	<body>
+	 <if condition="$check['0']['ITEMNAME'] eq null" >暂未有您的数据<else/>
+		<div class="jl">总检结论</div>
+		<div class="jls" id="jls" style="border-bottom: 0px solid white;">	
+				<ul>
+				<?php foreach($check as $value){?>
+				<li style="list-style-type : disc;list-style-position : inside "><?php echo $value['DEPTNAME'];?></li>
+				<li><?php  if($value['CHECKITEMTYPE']=='0'){echo "检查项目";}if($value['CHECKITEMTYPE']=='1'){echo "医技项目";}if($value['CHECKITEMTYPE']=='2'){echo "化验项目";}if($value['CHECKITEMTYPE']=='3'){echo "其它项目";}?></li>
+				<li><?php echo $value['ITEMNAME'];?></li>
+				<li><?php if( is_array($value['CHECKVALUE'])){echo '';}else{ echo $value['CHECKVALUE'];}?></li>
+				<li><?php if( is_array($value['DEPTXJ'])){echo '';}else{ echo $value['DEPTXJ'];}?></li>
+				<li></li>
+				<?php }?>
+				</ul>
+			
+			
+		</div>
+		<div style="border-bottom: 1px solid #E8E8E8;height: 45px;background: #FFFFFF;font-size: 15px;color: #307fe2;line-height: 45px;padding-left: 50px;" id="icof" class="">
+		 <p class="ico1" id="ico1">查看更多</p>
+		</div>
+		<div class="jl">总检建议</div>
+		<div class="suggess" id="suggess">
+				<ul>
+					<?php foreach($check as $value){?>
+				<li style="list-style-type : disc;list-style-position : inside "><?php echo $value['DEPTNAME'];?></li>
+				<li><?php if( is_array($value['DEPTJY'])){echo '';}else{ echo $value['DEPTJY'];}?></li>
+				<li></li>
+				<?php }?>
+				</ul>
+		</div>
+		<div style="border-bottom: 1px solid #E8E8E8;height: 45px;background: #FFFFFF;font-size: 15px;color: #307fe2;line-height: 45px;padding-left: 50px;" id="icof2" class="">
+		 <p class="ico2" id="ico2">查看更多</p>
+		</div>
+    </if>
+	</body>
+
+</html>

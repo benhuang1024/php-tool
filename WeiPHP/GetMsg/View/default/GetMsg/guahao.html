@@ -1,0 +1,159 @@
+<!doctype html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0, user-scalable=yes" />
+    <title>免费医生咨询</title>
+    <link rel="stylesheet" href="benhuang/css/kitwaitserc.css"
+        type="text/css" />
+</head>
+<body>
+    <!--患者信息 beging-->
+    <div class="wait_box" id="step1Box">
+        <div class="fask_top bor_b">
+            <span class="cff8100">* </span>您提交的免费咨询将由公立医院医生免费为您解答！{$openid}</div>
+        <div class="fask_mess bgfff">
+            <ul>
+                <li class="boxs"><span class="ftit">所在地区</span>
+                    <select class="fasel boxs" id="3gask_provinces" onchange="GetCityList($(this).val(),0,true)">
+					 <option value="无锡" checked >无锡</option>                        
+                    </select>
+                    <select class="fasel boxs" id="3gask_city">
+						 <option value="崇安区">崇安区</option>
+                        <option value="南长区">南长区</option>
+                        <option value="北塘区">北塘区</option>                     
+						<option value="滨湖区">滨湖区</option>
+                        <option value="锡山区">锡山区</option>
+                        <option value="惠山区">惠山区</option>                     
+                    </select>
+                    <div class="clear">
+                    </div>
+                </li>
+                <li class="boxs"><span class="ftit">咨询分类</span>
+                    <select id="3gask_BigDept" class="fasel boxs" onchange="GetDeptByBigDeptID($(this).val())">
+                        <option value="0">请选择科室</option>
+                        <option value="3">内科</option>
+                        <option value="4">外科</option>
+                        <option value="5">妇产科</option>
+                        <option value="80">儿科</option>
+                        <option value="79">五官科</option>
+                        <option value="19">肿瘤科</option>
+                        <option value="13">皮肤性病科</option>
+                        <option value="50">中医科</option>
+                        <option value="16">传染病科</option>
+                        <option value="54">心理健康科</option>
+                        <option value="27">男性科</option>
+                        <option value="14">医学美容科</option>
+                        <option value="21">康复科</option>
+                        <option value="52">中西医结合</option>
+                        <option value="15">精神科</option>
+                        <option value="81">医学影像科</option>
+                        <option value="78">其他</option>
+                        <option value="0">不知道选什么科</option>
+                    </select>
+                    <select id="3gask_SmallDept" class="fasel boxs" style="display: none;">
+                    </select>
+                    <div class="clear">
+                    </div>
+                </li>
+                <li class="boxs"><span class="ftit">性别</span>
+                    <label class="nradio">
+                        <i class="icon nchecked" v="1"></i>男</label>
+                    <label class="nradio">
+                        <i class="icon" v="0"></i>女</label>
+                    <div class="clear">
+                    </div>
+                </li>
+                <li class="boxs"><span class="ftit">年龄</span> <span class="pm_age boxs">
+                    <input id="3gask_Age" type="text" class="ageinput boxs" value="" />
+                    <select id="3gask_AgeType" class="agesel boxs">
+                        <option value="0">岁</option>
+                        <option value="1">月</option>
+                    </select>
+                </span>
+                    <div class="clear">
+                    </div>
+                </li>
+            </ul>
+        </div>
+        <div class="combtn">
+            <a href="javascript:toNext();">下一步</a></div>
+    </div>
+    <!--患者信息 end-->
+    <!--咨询内容 begin-->
+    <div class="wait_box" id="setp2Box" style="display: none">
+        <div class="zaskbox bor_b">
+            <div class="zask_top">
+                <i class="icon zatb1"></i><span class="cff8100">* </span>发病时间</div>
+            <textarea maxlength="20" id="txtFBSJ" placeholder="请输入具体发病时间"
+                    class="zasktexa boxs"></textarea>
+        </div>
+        <div class="zaskbox bor_b">
+            <div class="zask_top">
+                <i class="icon zatb2"></i><span class="cff8100">* </span>主要症状</div>
+            <textarea maxlength="300" id="txtZYBZ" placeholder="请尽可能详细描述您的症状，疾病和身体状况，以便医生更好的提供意见。(请至少输入10个字)"
+                class="zasktexa boxs"></textarea>
+            <span class="zaskword">0/300</span>
+        </div>
+        <div class="zaskbox bor_b">
+            <div class="zask_top">
+                <i class="icon zatb3"></i><span class="cff8100" style="color:#fafafa">* </span>就诊经历</div>
+            <textarea maxlength="300" id="txtYZJL" placeholder="如有过就诊，请详细描述您的就诊情况（选填）。" class="zasktexa boxs"></textarea>
+            <span class="zaskword">0/300</span>
+        </div>
+        <div class="zaskbox bor_b">
+            <div class="zask_top">
+                <i class="icon zatb4"></i><span class="cff8100">* </span>想得到什么帮助</div>
+            <textarea maxlength="300" id="txtHelp" placeholder="想得到什么帮助。(请至少输入10个字)" class="zasktexa boxs"></textarea>
+            <span class="zaskword">0/300</span>
+        </div>
+        
+        <div class="zf_agree">
+            <span class="zckbox"><i id="cbk_agree" class="icon ncheck"></i>我已阅读<a href="javascript:agreeShow();">咨询说明</a></span>
+        </div>
+        <div class="combtn">
+            <a href="javascript:;" onclick="AddQuestion();">提交咨询</a></div>
+    </div>
+    <!--咨询内容 end-->
+    <!--用户协议 begin-->
+    <div class="agreepop" style="display: none;">
+        <div class="arepagree">
+            <p class="areatit">
+                咨询说明</p>
+            <div id="agreecon">
+                <ul>
+                    <li>1.请详细描述问题，合理使用标点符号，便于专家更好了解患者情况。</li>
+                    <li>2.医生平时工作繁忙，在空余之时会第一时间回复您的问题，请耐心等待。</li>
+                    <li>3.郑重提醒：根据国家政策，网上交流不能替代医生面诊，医生的咨询回复建议仅供参考，具体诊疗请到正规医院在专业医生指导下进行！医生言论仅代表其个人观点，不代表本平台同意其说法，本平台不承担由此引起的法律责任。</li>
+                    <li>4.咨询内容不得带有任何非法、骚扰、中伤他人、辱骂、伤害、庸俗、淫秽等刺激性文字及非健康咨询方面的内容，一经发现，本站有权删除相关咨询内容。</li>
+                </ul>
+            </div>
+            <p class="aagree_btn">
+                <a href="javascript:agreeClose();">确定</a></p>
+        </div>
+    </div>
+    <div class="pop_screen" style="display: none;">
+    </div>
+    <!--用户协议 end-->
+    <div id="openDiv">
+    </div>
+       <script type="text/javascript">
+        var userCity=118;
+        var userPrv=13;
+        var minSize=10;
+        var maxSzie=1000;
+        var AdditionalParam="platformType=0&sourceType=0&sourceId=0";
+        var tourl="addAsk.aspx";
+        var isLogin="true";
+    </script>
+	<script type="text/javascript" src="http://res.wx.qq.com/open/js/jweixin-1.0.0.js"></script>
+    
+    <script type="text/javascript" src="http://apps.bdimg.com/libs/jquery/1.7.2/jquery.min.js"></script>    
+    <script type="text/javascript" src="/benhuang/js/jssdk.js"></script>
+    <!-- <script type="text/javascript" src="/benhuang/js/askbase.js"></script> -->
+    <script type="text/javascript" src="/benhuang/js/addAskT2.js"></script>
+    <script type="text/javascript" src="/benhuang/js/iscroll.js"></script>
+
+    
+</body>
+</html>

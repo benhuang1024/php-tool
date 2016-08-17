@@ -1,0 +1,25 @@
+<!doctype html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0, user-scalable=yes" />
+    <title>挂号信息</title>
+    <link rel="stylesheet" href="benhuang/css/show1.8.css"   type="text/css" />
+</head>
+<body>
+  <div class="net-reserve">
+  	网络咨询信息
+  </div>
+  <volist name="showRes" id="sub">
+   <table border="" cellspacing="" cellpadding="">
+  		<tr><td>问题:</td><td>{$sub.need}</td></tr>
+  		<tr><td>咨询时间:</td><td>{$sub.time}</td></tr>
+  		<tr><td>回复医生:</td><td>{$sub.doctor}</td></tr>  		
+  	</table>
+</volist>
+  	
+<div class="net-reserve">
+  	<a href="http://www.120gw.com/swt" target="_blank" >点击咨询专家</a>
+  </div>
+</body>
+</html>

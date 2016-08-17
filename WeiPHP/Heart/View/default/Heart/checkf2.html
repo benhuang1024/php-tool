@@ -1,0 +1,185 @@
+<!doctype html>
+<html>
+
+	<head>
+		<meta charset="utf-8">
+		<title>非正常项</title>
+		<meta name="Keywords" content="">
+		<meta name="Description" content="">
+		<!-- 移动设备支持 -->
+		<meta content="text/html; charset=UTF-8" http-equiv="Content-Type">
+		<meta content="width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no" name="viewport">
+		<meta content="no-cache,must-revalidate" http-equiv="Cache-Control">
+		<meta content="no-cache" http-equiv="pragma">
+		<meta content="0" http-equiv="expires">
+		<meta content="telephone=no, address=no" name="format-detection">
+		<meta name="apple-mobile-web-app-capable" content="yes">
+		<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+		<style type="text/css">
+			* {
+				margin: 0;
+				outline: 0;
+				padding: 0;
+			}
+			body {
+				font-size: 12px;
+				color: #212121;
+			}
+			.contend {
+				width: 100%;
+				min-width: 300px;
+				max-width: 640px;
+				height: 568px;
+				margin: 0 auto;
+				background: #fff;
+				color: rgb(33, 33, 33);
+			}
+			.main {
+				width: 100%;
+				height: auto;
+				background: #ffffff;
+			}
+			.head {
+				width: 100%;
+				height: 20px;
+			}
+			.mainhead {
+				width: 96%;
+				height: 40px;
+				line-height: 40px;
+				font-size: 16px;
+				padding-left: 4%;
+				border-top: 1px solid #E2e2e2;
+				font-weight: 600;
+			}
+			.mainfoot {
+				width: 100%;
+				height: 20px;
+				border-bottom: 1px solid #E2e2e2;
+			}
+			.mainfoot ul li {
+				width: 24%;
+				height: 20px;
+				text-align: center;
+				list-style: none;
+				float: left;
+				font-size: 12px;
+			}
+			.quan {
+				width: 100%;
+				min-height: 40px;
+				border-bottom: 1px solid #E2e2e2;
+				color: #307fe2;
+			}
+			.quan ul li {
+				width: 25%;
+				height: 30px;
+				line-height: 30px;
+				text-align: center;
+				list-style: none;
+				float: left;
+				font-size: 14px;
+			}
+			.nquan {
+				width: 100%;
+				min-height: 40px;
+				border-bottom: 1px solid #E2e2e2;
+				
+			}
+			.nquan ul li {
+				width: 25%;
+				min-height: 30px;
+				line-height: 30px;
+				text-align: center;
+				list-style: none;
+				float: left;
+				font-size: 12px;
+			}
+			.foot {
+				width: 96%;
+				height: 30px;
+				line-height: 30px;
+				border-bottom: 1px solid #d2d3d3;
+				text-align: right;
+				margin-bottom: 4%;
+				padding-right: 4%;
+				background: #ffffff;
+			}
+			.clear {
+				clear: both;
+			}
+			.checkout {
+				width: 100%;
+				display: inline-block;				
+			}
+			.checkout li {
+				background:#fff;
+				overflow:hidden;
+				float: left;
+				display: block;
+				width: 80%;
+				height: 60px;
+				padding-left:20%;
+				line-height: 60px;
+				margin-bottom:10px;
+				border:1px solid #bfbfbf;				
+			}
+			
+			.checkout li span{
+				font-size:16px;
+				float:left;
+				display:inline-block;
+				width:85%;				
+				height:60px;
+				overflow:hidden;
+			}
+			.blue{
+				color:#307fe2;
+			}
+		</style>
+	</head>
+
+	<body>
+		<div class="contend">
+			<div class="head"></div>
+
+			<if condition="$reports[0][0]['DEPTNAME'] eq null" ><ul class="checkout">
+				<li><span class="blue">恭喜您全部正常</span></li>
+			</ul>
+				<else/>
+			<volist name="reports" id="vo" >
+			<div class="main">
+				<div class="mainhead">{$vo.0.DEPTNAME}</div>
+				<div class="mainfoot">
+					<ul>
+						<li>项目名称</li>
+						<li>结果</li>
+						<li>判断</li>
+						<li>正常参考值</li>
+						<div class="clear"></div>
+					</ul>
+				</div>
+				 <volist name="vo" id="sub">
+				
+				<div class="nquan">
+					<ul>
+						<li>{$sub.ITEMNAME}</li>
+						<li>{$sub.CHECKVALUE}</li>
+						<li><if condition="($sub[GDBZ] neq H) AND ($sub[GDBZ] neq L)" >正常<else />不正常</if></li>
+						<li>{$sub.CKZ}</li>
+						<div class="clear"></div>
+					</ul>
+				</div>
+			
+			<!-- commentary date -->
+			<!-- <div class="foot">化验日期 : 2015-04-25</div> -->
+			</volist>
+			</div>
+		</volist>
+			<!---->
+
+			</if>
+		</div>
+	</body>
+
+</html>

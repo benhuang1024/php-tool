@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html>
+
+	<head>
+		<meta charset="utf-8" />
+		<meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no" />
+		<link rel="stylesheet" type="text/css" href="Resource/tzj/css/checks.1.5.css">
+		 
+		<script src="http://code.jquery.com/jquery-latest.js"></script>
+		<title>综合报告</title>
+		
+		
+		<script type="text/javascript">
+	
+		
+				$(document).ready(function(){
+					$("#ico1").click(function(){
+					if($("#jls").css('height') == "140px")
+					{
+						$('#jls').css('height','auto');
+						$("#ico1").css("background","url('Resource/tzj/images/s1.png') no-repeat");
+					}
+					else
+					{
+						$('#jls').css('height','140px');
+						$("#ico1").css("background","url('Resource/tzj/images/s21.png') no-repeat");
+					}
+					});
+					});
+				$(document).ready(function(){
+					$("#ico2").click(function(){
+					if($("#suggess").css('height') == "140px")
+					{
+						$('#suggess').css('height','auto');
+						$("#ico2").css("background","url('Resource/tzj/images/s1.png') no-repeat");
+					}
+					else
+					{
+						$('#suggess').css('height','140px');
+						$("#ico2").css("background","url('Resource/tzj/images/s21.png') no-repeat");
+					}
+					});
+					});
+			 
+	
+		
+       </script>
+  
+	</head>
+
+	<body>
+	
+		
+		<div class="jl">
+		 
+		
+				总检结论
+			
+			 <p class="ico1" id="ico1"></p>
+		</div>
+		<?php 
+		  print_r($check);
+		?>
+		<div class="jls" id="jls">
+		 
+		
+				<ul>
+				<li style="list-style-type : disc;list-style-position : inside ">内科</li>
+				<li>2型糖尿病</li>
+				<li>颈动脉粥样硬化伴斑块形成</li>
+				<li>甲状腺结节</li>
+				<li>胆囊息肉</li>
+				<li>左肾结石</li>
+				<li>胸部CT提示冠脉钙化</li>
+				<li></li>
+				<li style="list-style-type : disc;list-style-position : inside ">耳鼻喉科</li>
+				<li>慢性咽炎</li>
+				<li>鼾症</li>
+				<li></li>
+				<li style="list-style-type : disc;list-style-position : inside ">眼科</li>
+				<li>双眼屈光不正</li>
+				<li>眼底动脉硬化I级</li>
+				<li></li>
+				<li style="list-style-type : disc;list-style-position : inside ">空腔科</li>
+				<li>牙齿缺少</li>
+				</ul>
+			
+			
+		</div>
+		
+		<div class="jl">
+		 
+		
+				总检建议
+			
+			 <p class="ico2" id="ico2"></p>
+		</div>
+		<div class="suggess" id="suggess">
+		 
+		
+				<ul>
+				<li style="list-style-type : disc;list-style-position : inside ">内科</li>
+				<li>糖尿病：多掌握糖尿病的相关知识，了解糖尿病的危害。在专家医生的指导下。控制饮食，戒烟限酒，控制体重，适量运动，每周运动300分钟，合理药物治疗，定期监测空腹血糖及餐后两小时血糖、糖化血红蛋白等。</li>
+				<li></li>
+				<li>糖尿病：多掌握糖尿病的相关知识，了解糖尿病的危害。在专家医生的指导下。控制饮食，戒烟限酒，控制体重，适量运动，每周运动300分钟，合理药物治疗，定期监测空腹血糖及餐后两小时血糖、糖化血红蛋白等。</li>
+				</ul>
+			
+			
+		</div>
+    
+	</body>
+
+</html>

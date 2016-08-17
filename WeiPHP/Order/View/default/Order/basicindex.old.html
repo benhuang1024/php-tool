@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html lang="zh-cn">
+<head>
+<meta charset="utf-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge"/>
+<meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no"/>
+<title>科室报告</title>
+<link rel="stylesheet" type="text/css" href="Resource/tzj/css/basic_index_1.2.css">
+<style>
+a {				text-transform: none;
+				text-decoration: none;
+				color: #000;
+			}
+			a:hover {
+				text-transform: none;
+				text-decoration: none;
+				color: #000;
+			}
+</style>
+<script src="public/static/jquery-2.0.3.min.js"></script>
+<script type="text/javascript"src="Resource/tzj/js/order.js"></script>
+<script type="text/javascript">
+$(document).ready(function(){ 
+	
+	
+});
+</script>
+<style>
+body{
+	margin: 0 auto;
+	background-color: #f3f5f6;
+	font-size: 14px;
+	margin: 0px;
+	padding: 0px;
+}
+.index_main{
+	margin:0 auto;
+	margin-top: 20px;
+	border:0px;
+	text-align: center;
+	width:93%;
+}
+.clear{
+	clear: both;
+}
+.dtable{
+	width:100%;
+	margin:0 auto;
+	text-align: left;
+	margin-bottom: 10px;
+	background-color: white;
+	border:1px #CCC solid;
+	border-top:0px;
+	/*
+	border-radius:0px 0px 7px 7px;
+	*/
+}
+.dtable tr td{
+	width:50%;
+	height:55px;
+	
+	margin:0 auto;
+	text-align: left;
+	border:1px #cccccc solid;
+	border-top:0px #cccccc solid;
+	padding-left:10%;
+	border-left:0px;
+}
+.dtable tr td img{
+	display: inline-block;
+	width:10px;
+	height:10px;
+	background-size:contain;
+	margin-right: 8px;	
+}
+</style>
+</head>
+<body>
+<div class="index_main">
+<div style="height:31px;">
+<img src="Resource/tzj/images/basic_index_top.png" width="100%"/>
+</div>
+<div>
+<table class="dtable"border="0" cellpadding="0" cellspacing="0">
+	<volist name="check" id="vo" >
+		<tr>
+			<td ><img src="Resource/tzj/images/basic_index_to1.png"><a href="{:U('/addon/Order/Order/xx/#')}#{$key}">{$vo[0]}</a></td>
+			
+		</tr>
+	</volist>	
+		
+	</table>
+		<div class="clear"></div>
+
+
+
+</div><div class="clear"></div>
+
+
+
+</div>
+</body>
+</html>

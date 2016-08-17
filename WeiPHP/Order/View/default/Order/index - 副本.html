@@ -1,0 +1,386 @@
+<!DOCTYPE html>
+<html lang="zh-cn">
+<head>
+<meta charset="utf-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge"/>
+<meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no"/>
+<title>健检预约</title>
+<link rel="stylesheet" type="text/css" href="Resource/tzj/css/order_2.3.css">
+<script src="public/static/jquery-2.0.3.min.js"></script>
+<script type="text/javascript"src="Resource/tzj/js/order_10.js"></script>
+<script type="text/javascript">
+function botton_s(){
+	var name = $('#name').val().trim();
+	var sex = $('#sex').val().trim();
+	var tel = $('#tel').val().trim();
+	var adid = $('#adid').val().trim();
+	var old = $('#old').val().trim();
+	var type = $('#type').val().trim();
+	var ad_type = $('#ad_type').val().trim();
+	var date = $('#date').val().trim();
+	var time = $('#time').val().trim();
+	var num = $('#num').val().trim();
+	if (!name) {
+		showInfo("请输入您的姓名","警告");
+		return false;
+	}
+	if (!sex) {
+		showInfo("请选择您的性别","警告");
+		return false;
+	}
+	var tel_text = /^(((\d{3,4}-)|\d{3.4}-)?\d{7,8})|\d{11}$/;
+	if (!tel||!(tel_text.test(tel))) {
+		showInfo("请输入您的正确联系方式","警告");
+		return false;
+	}
+	var adid_text = /^\d{15}|\d{18}$/;
+	if (!adid||!(adid_text.test(adid))) {
+		showInfo("请输入您的正确的身份证号码，且只允许输入数字","警告");
+		return false;
+	}
+	var num_text = /^\+?[1-9][0-9]*$/;
+	if (!old||!(num_text.test(old))) {
+		showInfo("请输入您的年龄，且只允许输入数字","警告");
+		return false;
+	 }
+	 if (!type) {
+		showInfo("请选择您的预约套餐","警告");
+		return false;
+	}
+
+	var myDate = new Date();
+	myDate.getYear();        //获取当前年份(2位)
+	myDate.getFullYear();    //获取完整的年份(4位,1970-????)
+	myDate.getMonth();       //获取当前月份(0-11,0代表1月)
+	myDate.getDate();        //获取当前日(1-31)
+	myDate.getDay();         //获取当前星期X(0-6,0代表星期天)
+	myDate.getTime();        //获取当前时间(从1970.1.1开始的毫秒数)
+	var nowh = myDate.getHours();       //获取当前小时数(0-23)
+	var nowm  = myDate.getMinutes();     //获取当前分钟数(0-59)
+	myDate.getSeconds();     //获取当前秒数(0-59)
+	myDate.getMilliseconds();    //获取当前毫秒数(0-999)
+	var nowdate = myDate.toLocaleDateString();     //获取当前日期
+	var nowtime = myDate.toLocaleTimeString();     //获取当前时间
+	var nowAll = myDate.toLocaleString( );        //获取日期与时间
+
+	var d1 = new Date(nowdate.replace(/\-/g, "\/"));  
+	var d2 = new Date(date.replace(/\-/g, "\/"));
+
+	if (!date) {
+		showInfo("请选择或输入预约日期","警告");
+		return false;
+	}
+	if(d1 > d2){  
+		showInfo("预约日期不可以小于当前日期！","警告");  
+		return false;  
+	}
+	if (!time) {
+		showInfo("请选择或输入预约时间","警告");
+		return false;
+	}
+	var arrStartDate =nowdate.split("-"); 
+	if(arrStartDate.length < 3){
+		var arrStartDate = nowdate.split("/"); 
+	}  
+	var arrEndDate = date.split("-");   
+	if(arrEndDate.length < 3){
+		var arrEndDate = date.split("/"); 
+	}  
+	var arrEndTime = time.split(":");   
+	var allStartDate = new Date(arrStartDate[0], arrStartDate[1], arrStartDate[2], nowh, nowm, 00); 
+	var allEndDate = new Date(arrEndDate[0], arrEndDate[1], arrEndDate[2], arrEndTime[0], arrEndTime[1], 00);
+	if (allStartDate > allEndDate) {   
+			showInfo("预约时间不能小于当前时间","警告");
+			return false;
+	}
+	if (!num||!(num_text.test(num))) {
+		showInfo("请输入您的预约人数","警告");
+		return false;
+	}
+	$("#sucess_order").click();
+	
+	setTimeout(function () { 
+       $("#sleep2").val('2');
+    }, 3000);
+}
+function detectMacXFF() {
+	var userAgent = navigator.userAgent.toLowerCase();
+	if(userAgent.indexOf("mac") != -1 && userAgent.indexOf("firefox") != -1) {
+		return true;
+	}
+}
+
+function in_array(needle, haystack) {
+	if(typeof needle == "string" || typeof needle == "number") {
+		for(var i in haystack) {
+			if(haystack[i] == needle) {
+				return true;
+			}
+		}
+	}
+	return false;
+}
+
+function sd_load(sd_width) {
+	if(sd_width) {
+		$("#SD_window").css("width", sd_width + "px");
+	}
+	var sd_top = ($(window).height() - $("#SD_window").height()) / 3 + $(document).scrollTop();
+	if(sd_top < 0) {
+		sd_top = 0;
+	}
+	var sd_left = ($(window).width() - $("#SD_window").width()) / 2;
+	if(sd_left < 0) {
+		sd_left = 0;
+	}
+	$("#SD_window").css("top", sd_top);
+	$("#SD_window").css("left", sd_left);
+}
+
+function sd_remove() {
+	$("#SD_close,#SD_cancel,#SD_confirm").unbind("click");
+	$("#SD_window,#SD_overlay,#SD_HideSelect").remove();
+	if(typeof document.body.style.maxHeight == "undefined") {
+		$("body","html").css({height: "auto", width: "auto"});
+	}
+}
+
+function showDialog(mode, msg, t, sd_width) {
+	var sd_width = sd_width ? sd_width : 290;
+	var mode = in_array(mode, ['confirm', 'window', 'info', 'loading']) ? mode : 'alert';
+	var t = t ? t : "提交";
+	var msg = msg ? msg : "";
+	var confirmtxt = confirmtxt ? confirmtxt : "确定";
+	var canceltxt = canceltxt ? canceltxt : "取消";
+	sd_remove();
+	try {
+		if(typeof document.body.style.maxHeight === "undefined") {
+			$("body","html").css({height: "100%", width: "100%"});
+			if(document.getElementById("SD_HideSelect") === null) {
+				$("body").append("<iframe id='SD_HideSelect'></iframe><div id='SD_overlay'></div>");
+			}
+		} else {
+			if(document.getElementById("SD_overlay") === null) {
+				$("body").append("<div id='SD_overlay'></div>");
+			}
+		}
+		if(mode == "alert") {
+			if(detectMacXFF()) {
+				$("#SD_overlay").addClass("SD_overlayMacFFBGHack");
+			} else {
+				$("#SD_overlay").addClass("SD_overlayBG");
+			}
+		} else {
+			if(detectMacXFF()) {
+				$("#SD_overlay").addClass("SD_overlayMacFFBGHack2");
+			} else {
+				$("#SD_overlay").addClass("SD_overlayBG2");
+			}
+		}
+		$("body").append("<div id='SD_window'></div>");
+		var SD_html;
+		SD_html = "";
+		SD_html += "<table cellspacing='0' cellpadding='0'><tbody><tr><td class='SD_bg'></td><td class='SD_bg'></td><td class='SD_bg'></td></tr>";
+		SD_html += "<tr><td class='SD_bg'></td>";
+		SD_html += "<td id='SD_container'>";
+		SD_html += "<h3 id='SD_title'>" + t + "</h3>";
+		SD_html += "<div id='SD_body'><div id='SD_content'>" + msg + "</div></div>";
+		SD_html += "<div id='SD_button'><div class='SD_button'>";
+		//SD_html += "<a id='SD_confirm'>" + confirmtxt + "</a>";
+		//SD_html += "<a id='SD_cancel'>" + canceltxt + "</a>";
+		SD_html += "</div></div>";
+		//SD_html += "<a href='javascript:;' id='SD_close' title='关闭'></a>";
+		SD_html += "</td>";
+		SD_html += "<td class='SD_bg'></td></tr>";
+		SD_html += "<tr><td class='SD_bg'></td><td class='SD_bg'></td><td class='SD_bg'></td></tr></tbody></table>";
+		$("#SD_window").append(SD_html);
+		$("#SD_confirm,#SD_cancel,#SD_close,#SD_window").bind("click", function(){
+			sd_remove();
+		});
+		if(mode == "info" || mode == "alert") {
+			$("#SD_cancel").hide();
+			$("#SD_button").show();
+		}
+		if(mode == "window") {
+			//$("#SD_close").show();
+		}
+		if(mode == "confirm") {
+			$("#SD_button").show();
+		}
+		var sd_move = false;
+		var sd_x, sd_y;
+		$("#SD_container > h3").click(function(){}).mousedown(function(e){
+			sd_move = true;
+			sd_x = e.pageX - parseInt($("#SD_window").css("left"));
+			sd_y = e.pageY - parseInt($("#SD_window").css("top"));
+		});
+		$(document).mousemove(function(e){
+			if(sd_move){
+				var x = e.pageX - sd_x;
+				var y = e.pageY - sd_y;
+				$("#SD_window").css({left:x, top:y});
+			}
+		}).mouseup(function(){
+			sd_move = false;
+		});
+		$("#SD_body").width(sd_width - 50);
+		sd_load(sd_width);
+		$("#SD_window").show();
+		$("#SD_window").focus();
+	} catch(e) {
+		alert("System Error !");
+	}
+}
+
+function showInfo(msg,t, fn, timeout) {
+	showDialog("info", msg,t);
+	$("#SD_confirm").unbind("click");
+	if(fn && timeout) {
+		st = setTimeout(function(){
+			sd_remove();
+			fn();
+		}, timeout * 1000);
+	}
+	$("#SD_confirm").bind("click", function(){
+		if(timeout) {
+			clearTimeout(st);
+		}
+		sd_remove();
+		if(fn) {
+			fn();
+		}
+	});
+}
+
+
+function showConfirm(msg, fn) {
+	showDialog("confirm", msg);
+	$("#SD_confirm").unbind("click");
+	$("#SD_confirm").bind("click", function(){
+		if(fn) {
+			fn();
+		}
+	});
+}
+
+function sleep2(){
+	setTimeout(function () { 
+       $("#sleep2").val('1');
+    }, 8000);
+}
+</script>
+</head>
+<body>
+<img src="Resource/tzj/images/order_top.jpg"width="100%"/>
+<a style="display:block;text-decoration:blink;" href="{:U('/addon/Heart/Heart/subscribe')}" class="detail_bg_top">点击预约记录</a>
+<div class="order_main">
+	<div style="margin:0px;padding:0px;height:23px;padding-top:8px"><img src="Resource/tzj/images/order_bg_top.jpg"width="100%"style="margin:0px;padding:0px;"/></div>
+    	<div style="clear:both;"></div>
+		<div class="content">
+            <div class="content_all">
+				<form action="{$url_add}" method="post" onsubmit="sleep2();"> 
+				<input type="hidden" name="sleep2" id="sleep2" value="" />
+            	<table class="ctable"border="0"spacing="0"cellPadding=0>
+                	<tr><td>您的姓名</td>
+                    	<td colspan="2"><input type="text" required="required" id="name" class="input" name="name" value="{$datas.name}" <if condition="$datas.name neq null" >readonly="readonly" </if> />
+                        </td>
+                      </tr>
+                    <tr><td>您的姓别</td>
+                    	<td colspan="2"><select class="cont_order_type"id="sex"name="sex"size='1'style="height:25px;width:90%">
+                                <option value="0" <if condition="$datas.sex eq 1" > required readonly="readonly" </if> >男</option>
+                                <option value="1" <if condition="$datas.sex eq 2" > required readonly="readonly" </if> >女</option>
+                            </select>
+                        </td></tr>
+                    <tr><td>您的电话</td><td colspan="2"><input type="text" required="required"id="tel"name="tel"class="input" value="{$datas.telphone}" <if condition="$datas.telphone neq null" >readonly="readonly" </if> /></td></tr>
+                    <tr><td>身份证号</td><td colspan="2"><input type="text" required="required"id="adid"name="adid"class="input" value="{$datas.cardID}" <if condition="$datas.cardID neq null" >readonly="readonly" </if> /></td></tr>
+                    <tr><td>您的年龄</td><td colspan="2"><input type="number" required="required"id="old"name="age"class="input" value="{$datas.age}" <if condition="$datas.age neq null" >readonly="readonly" </if> /></td></tr>
+                    <tr><td>预约套餐</td>
+                        <td colspan="2"><select class="cont_order_type"id="type"name="type"size='1'style="height:25px;width:90%;font-size:12px;">
+                                <option value="0">A套餐（男4173元/女4914元）</option>
+                                <option value="1">B套餐（男 2239元/女 2935元）</option>
+                                <option value="2">C套餐（男 1242元/女 1444元）</option>
+								<option value="3">VIP套餐（男6288元/女7380元）</option>
+								<option value="4">基本套餐（参考价格：1642元）</option>
+                            </select>
+                        </td></tr>
+						<tr><td>可增项目</td>
+                        <td colspan="2">
+                        <select class="cont_order_type"id="ad_type"name="ad_type"size='1'style="height:25px;width:90%;font-size:12px;">
+								<option value="0">无</option>
+                                <option value="1">妇科疾病筛查</option>
+                                <option value="2">乳腺疾病筛查</option>
+                                <option value="3">心血管辅助检查</option>
+								<option value="4">骨质疏松相关检查</option>
+								<option value="5">男性疾病筛查</option>
+								<option value="6">胃部检查项目</option>
+								<option value="7">外科新增项目</option>
+								<option value="8">物理诊断科新增项目</option>
+                            </select>
+                        </td></tr>
+                    <tr><td>预约时间</td>
+                    	<td style=""><input type="date" required="required"id="date"name="date"class="input"style="height: 25px;"/>
+                         </td>
+                        <td style="width:50px">
+                    		<input type="time" required="required"id="time"name="time"class="input"style="height: 25px;width:70%"/>
+                           </td></tr>
+                    <tr><td>预约人数</td><td colspan="2"><input type="number" required="required"id="num"name="num"class="input"/></td></tr>
+                    <tr><td colspan="3">
+                    <input type="submit"value="提交" class="footer_button"id="button"onClick="return botton_s();"/>
+                   <!-- <button class="footer_button"id="button">提交</button>-->
+                    </td></tr>
+                 </table>
+				</form>				 
+            </div>
+		</div>
+</div>
+<table class="dtable"border="0" cellpadding="0" cellspacing="0">
+		<tr>
+			<td colspan="2"><div class="detail_bg_top">点击查看各个套餐详情</div></td>
+		</tr>
+		<tr>
+			<td onclick='showInfo("A套餐（男4173元/女4914元）","A套餐");'><a class="detail_bg">A</a><a href="http://ben.com/index.php?s=/addon/CustomReply/CustomReply/detail/token/gh_f2e51b1a7957/openid/oRY1nt1vxVOJJjnHd1Qx50rbXK2A/id/55.html" class="detail_bg1">套餐A</a></td>
+			<td style="border-left:0px;"onclick='showInfo("VIP套餐（男6288元/女7380元）");'><a href="http://ben.com/index.php?s=/addon/CustomReply/CustomReply/detail/token/gh_f2e51b1a7957/openid/oRY1nt1vxVOJJjnHd1Qx50rbXK2A/id/56.html" class="detail_bg_vip">vip</a></td>
+		</tr>
+		<tr>
+			<td onclick='showInfo("B套餐（男 2239元/女 2935元）","B套餐");'><a class="detail_bg">B</a><a href="http://ben.com/index.php?s=/addon/CustomReply/CustomReply/detail/token/gh_f2e51b1a7957/openid/oRY1nt1vxVOJJjnHd1Qx50rbXK2A/id/52.html" class="detail_bg1">套餐B</a></td>
+				<td style="border-left:0px;color:orange;font-size:12px;"onclick='showInfo("基本套餐（参考价格：1642元）");'><a href="http://ben.com/index.php?s=/addon/CustomReply/CustomReply/detail/token/gh_f2e51b1a7957/openid/oRY1nt1vxVOJJjnHd1Qx50rbXK2A/id/57.html" >基础档</a></td>
+		</tr>
+		<tr>
+			<td onclick='showInfo("C套餐（男 1242元/女 1444元）","C套餐");'><a class="detail_bg">C</a><a href="http://ben.com/index.php?s=/addon/CustomReply/CustomReply/detail/token/gh_f2e51b1a7957/openid/oRY1nt1vxVOJJjnHd1Qx50rbXK2A/id/51.html" class="detail_bg1">套餐C</a></td>
+<td style="border-left:0px;color:orange;font-size:12px;"onclick='showInfo("基本套餐（参考价格：1642元）");'><a href="http://ben.com/index.php?s=/addon/CustomReply/CustomReply/detail/token/gh_f2e51b1a7957/openid/oRY1nt1vxVOJJjnHd1Qx50rbXK2A/id/58.html" >可增加项目</a></td>
+				<!--<td style="border-left:0px;">
+			
+			 <select class="cont_order_type"id="type"size='1'style="height:25px;width:66%;border:0px;margin-left:10px;color:orange;font-size:12px;">
+					<option value="z0">可增加项目</option>
+					<option value="z1"><a href="http://ben.com/index.php?s=/addon/CustomReply/CustomReply/detail/token/gh_f2e51b1a7957/openid/oRY1nt1vxVOJJjnHd1Qx50rbXK2A/id/58.html" >妇科疾病筛查</a></option>
+					<option value="z2"><a href="http://ben.com/index.php?s=/addon/CustomReply/CustomReply/detail/token/gh_f2e51b1a7957/openid/oRY1nt1vxVOJJjnHd1Qx50rbXK2A/id/59.html" >乳腺疾病筛查</a></option>
+					<option value="z3"><a href="http://ben.com/index.php?s=/addon/CustomReply/CustomReply/detail/token/gh_f2e51b1a7957/openid/oRY1nt1vxVOJJjnHd1Qx50rbXK2A/id/60.html" >心血管辅助检查</a></option>
+					<option value="z4"><a href="http://ben.com/index.php?s=/addon/CustomReply/CustomReply/detail/token/gh_f2e51b1a7957/openid/oRY1nt1vxVOJJjnHd1Qx50rbXK2A/id/61.html" >骨质疏松相关检查</a></option>
+					<option value="z5"><a href="http://ben.com/index.php?s=/addon/CustomReply/CustomReply/detail/token/gh_f2e51b1a7957/openid/oRY1nt1vxVOJJjnHd1Qx50rbXK2A/id/62.html" >男性疾病筛查</a></option>
+					<option value="z6"><a href="http://ben.com/index.php?s=/addon/CustomReply/CustomReply/detail/token/gh_f2e51b1a7957/openid/oRY1nt1vxVOJJjnHd1Qx50rbXK2A/id/63.html" >胃部检查项目</a></option>
+					<option value="z7"><a href="http://ben.com/index.php?s=/addon/CustomReply/CustomReply/detail/token/gh_f2e51b1a7957/openid/oRY1nt1vxVOJJjnHd1Qx50rbXK2A/id/64.html" >外科新增项目</a></option>
+					<option value="z8"><a href="http://ben.com/index.php?s=/addon/CustomReply/CustomReply/detail/token/gh_f2e51b1a7957/openid/oRY1nt1vxVOJJjnHd1Qx50rbXK2A/id/65.html" >物理诊断科新增项目</a></option>
+				</select>
+			</td> -->
+		</tr>
+	</table>
+	<!--
+<div class="order_type_detail"style="">
+
+	
+	
+	<div><a class="detail_bg">A</a><a class="detail_bg1">套餐A</a></div><div style="clear:both;"></div>
+    <div><a class="detail_bg">B</a><a class="detail_bg1">套餐B</a></div><div style="clear:both;"></div>
+    <div><a class="detail_bg">C</a><a class="detail_bg1">套餐C</a></div><div style="clear:both;"></div>
+	
+</div>
+-->
+<div class="order_ture">
+	<div id="sucess_order" onclick='showInfo("您的预约已收到，我们会尽快审核，并通过微信通知您审核结果。<br/>您也可以到个人中心查看预约审核结果。");'>
+</div>
+<div id="faile_order"onclick='showInfo("您的预约失败，请重新预约。","预约失败");'></div>
+
+</div>
+
+</body>
+</html>

@@ -1,0 +1,25 @@
+<!doctype html>
+<!-- ben benhuang1024@163.com -->
+<head>	
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0, user-scalable=no">	
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8"></head>
+<title>商务通异步加载手机号</title>	
+<body>
+<script type="text/javascript" src="http://libs.baidu.com/jquery/1.11.1/jquery.min.js"></script>
+<script type='text/javascript'>
+	document.write("<script type='text/javascript' src='sj.js'><\/script>");
+</script>
+<script>
+	function onloadImg(){	
+		var loads = $(".loadimg");
+		var x;
+		for(x in loads){
+			var srcupd = loads.eq(x).attr("data-src");
+			loads.eq(x).attr("src",srcupd);
+		}
+	}
+	setTimeout("onloadImg()",4000);
+	document.getElementById("callBtn").onclick=function(){lxb.call(document.getElementById("telInput"))};
+</script>
+
+</body></html>

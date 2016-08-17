@@ -1,0 +1,565 @@
+<!DOCTYPE html>
+<html lang="zh-cn">
+<head>
+<meta charset="utf-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge"/>
+<meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no"/>
+<title>健检预约</title>
+<script src="public/static/jquery-2.0.3.min.js"></script>
+
+<script type="text/javascript">
+function order_form(url,type){
+	var money_true = $("#money").html();
+	
+	var order_type = type;
+	if($("#check_type_torf").html())
+	for(var i=0;i<=7;i++){
+		if($("#check_"+i).is(':checked')){
+			order_type = order_type+'_'+i;
+		}
+	}
+	url = url.replace('.html', '')+'/order_type/'+order_type+'/money/'+money_true;
+	//console.log(url);
+	window.location.href = url;
+}
+
+</script>
+<style>
+	body{
+		background-color:#fff ;
+	}
+div{
+	height:45px;
+	line-height:45px;
+	width:auto;
+	background-color:#fff ;
+	/*background-color:#f2f5f5;*/
+	/*border-bottom:1px #ddd solid;
+	border-top:1px #ddd solid;*/
+	color:#307fe2;
+	font-size:16px;
+}
+.bor{
+	float:left;
+	display:block;
+	border-left:10px solid #307fe2;
+	height:45px;
+}
+.bor2{
+	margin-left:26px;
+	float:left;
+	display:block;
+	width:30px;
+}
+.bor3{
+	font-size:14px;
+}
+.bor1{
+	margin-right:20px;
+	float:right;
+	display:block;
+	margin-top:20px;
+	background:url(Resource/tzj/images/ssss/down.png);
+	width:10px;
+	height:5px;
+	background-size:contain;
+}
+.bor1_new{
+	margin-right:20px;
+	float:right;
+	display:block;
+	margin-top:20px;
+	background:url(Resource/tzj/images/ssss/up.png);
+	width:10px;
+	height:5px;
+	background-size:contain;
+}
+.disnone{
+	display:none;
+}
+.detail{
+	height:auto;
+	font-size:12px;
+	color:black;
+	margin-top:0px;
+	line-height:20px;
+	padding:5px 10px 5px 40px;
+}
+body{
+	position:absolute;
+	width:100%;
+	
+}
+
+</style>
+	<script>
+		function change(val){
+			$("#detail_"+val).toggleClass("disnone");
+			$('#detail_c_'+val).toggleClass('bor1');
+			$('#detail_c_'+val).toggleClass('bor1_new');
+		}
+		function changemoney(money,id){
+			var money_true = $("#money").html();
+			if($("#check_"+id).is(':checked')){
+				money_new = parseInt(money_true) + parseInt(money);
+			}else{
+				money_new = parseInt(money_true) - parseInt(money);
+			}
+			$("#money").html(money_new);
+		}
+
+	</script>
+</head>
+<body style="background-color:#fff;margin:0px">
+<div id="all">
+<div style="/*margin-top:30px;*/">
+
+<div style="text-align:center">
+	<a style="">{$title}</a>
+</div>
+<div style="padding:0 0 10px 30px;height: auto;line-height: 20px;">
+	温馨提醒：价格咨询拨打电话<br />
+	<a style="color:#307fe2;text-decoration:none;" href="tel:0510-82336000">0510-82336000</a>
+</div>
+<div style="height:auto;padding-left: 30px;font-size:14px;color:black;margin-top:-5px;word-wrap: break-word;word-break: normal; line-height:22px">
+<?php if ($type=='0'){?>
+
+	1	基础检查
+	<br />2	内科诊疗
+	<br />3	保健咨询
+	<br />4	外科诊疗：一次性直肠镜（含材料药费）
+	<br />5	眼科诊疗：电脑客观验光, 免散瞳眼底照相, 电脑非接触眼压(检查), 裂隙灯检查
+	<br />6	耳鼻喉诊疗：耳、鼻、鼻咽部、喉，间接鼻咽镜检查
+	<br />7	口腔科诊疗：口腔颌面部、牙体牙髓、牙周组织、口腔黏膜等检查
+	<br />8	低剂量CT摄影：X线计算机体层(CT)平扫－胸部
+	<br />9	带电脑的多导联心电图
+	<br />10	彩色多普勒超声常规检查：肝，胆，脾，双肾
+	<br />11	浅表器官彩超：甲状腺
+	<br />12	空腹13C呼气试验
+	<br />13	疾病风险评估
+	<br />14	磁卡、资料费、健康书籍
+	<br />15	数字化医疗影像数据及介质费
+	<br />16	营养诊疗
+	<br />17	肝功能十二项：谷草转氨酶，r-谷氨酰转肽酶，谷丙转氨酶，碱性磷酸酶，总胆红素，总蛋白，直接胆红素，白蛋白，球蛋白，间接胆红素，白球比，乳酸脱氢酶LDH
+	<br />18	血脂五项：甘油三酯TG，总胆固醇Tch，高密度脂蛋白，低密度脂蛋白，脂蛋白(a)LP(a)
+	<br />19	肾功能三项：尿素氮，肌酐，血尿酸
+	<br />20	血常规(五分类)
+	<br />21	心血管三项：超敏CRP，同型半胱氨酸，纤维蛋白原
+	<br />22	空腹血糖
+	<br />23	糖化血红蛋白
+	<br />24	血胰岛素
+	<br />25	防癌三项：癌胚抗原，甲胎蛋白， CA199
+	<br />26	尿11联：尿胆红素，尿蛋白质，尿白细胞，尿比重，尿胆原，尿葡萄糖，尿酸碱度，尿酮体，尿维生素C，尿亚硝酸盐，尿隐血
+	<br />27	尿沉渣
+	<br />28	乳酸脱氢酶LDH
+	<br />29	尿沉渣
+
+<?php } ?>
+<?php if ($type=='1'){?>
+	1	基础检查
+	<br />2	内科诊疗
+	<br />3	保健咨询
+	<br />4	通气功能检查
+	<br />5	中医诊疗
+	<br />6	营养诊疗
+	<br />7	外科诊疗：一次性直肠镜（含材料药费）
+	<br />8	眼科诊疗：电脑客观验光，免散瞳眼底照相，电脑非接触眼压(检查)，OCT（光学相干断层成像）(新增)
+	<br />9	耳鼻喉诊疗：耳、鼻、鼻咽部、喉，间接喉镜及鼻咽镜检查
+	<br />10	口腔科诊疗：口腔颌面部、牙体牙髓、牙周组织、口腔黏膜等检查,
+	<br />11	妇科诊疗：妇科检查（宫颈刮片、子宫双附件)，液基薄层细胞制片术（TCT）
+	<br />12	女性粉红丝带套餐：乳房检查（触诊），乳腺数字化X线摄影（双侧），HPV
+	<br />13	计算机X线摄影（CR）：口腔全景
+	<br />14	X线计算机体层(CT)平扫：胸部，带电脑的多导联心电图
+	<br />15	彩色多普勒超声常规检查：肝，胆，脾，双肾
+	<br />16	彩超常规检查：前列腺
+	<br />17	浅表器官彩超：甲状腺
+	<br />18	腔内彩超：阴道
+	<br />19	颅内多普勒检查（TCD）
+	<br />20	心脏彩超
+	<br />21	13C呼气试验
+	<br />22	心理压力测试
+	<br />23	骨密度
+	<br />24	动脉硬化检测
+	<br />25	人体成分分析
+	<br />26	磁卡、资料费、健康书籍
+	<br />27	数字化医疗影像数据及介质费
+	<br />28	疾病风险评估
+	<br />29	肝功能十一项：谷草转氨酶，r-谷氨酰转肽酶，谷丙转氨酶，碱性磷酸酶，总胆红素，总蛋白，直接胆红素，白蛋白，球蛋白，间接胆红素，白球比
+	<br />30	血脂七项：甘油三酯，总胆固醇，高密度脂蛋白，低密度脂蛋白，脂蛋白(a)，ApoA、ApoB
+	<br />31	心血管六项：超敏CRP，肌钙蛋白，同型半胱氨酸, 纤维蛋白原, 血浆凝血因子活性测定—Ⅷ，D-二聚体
+	<br />32	肾功能二项：尿素氮，肌酐
+	<br />33	甲状腺五项：促甲状腺激素，游离T3，游离T4，总T3，总T4
+	<br />34	乙肝两对半定性：HBCAB，HBEAB，HBEAG，HBSAB，HBSAG
+	<br />35	丙肝抗体
+	<br />36	空腹血糖
+	<br />37	血胰岛素
+	<br />38	血清C肽、糖化血清白蛋白
+	<br />39	血尿酸
+	<br />40	血常规(五分类)
+	<br />41	防癌八项：癌胚抗原，甲胎蛋白，CYFERA21-1，CA199，CA50，鳞癌抗原（SccAg），PSA（男）CA125（女），CA242
+	<br />42	尿11联：尿胆红素，尿蛋白质，尿白细胞，尿比重，尿胆原，尿葡萄糖，尿酸碱度，尿酮体，尿维生素C，尿亚硝酸盐，尿隐血
+	<br />43	乳酸脱氢酶LDH
+	<br />44	血清胱抑素测定(Cys-c)
+	<br />45	前白蛋白
+	<br />46	β2微球蛋白
+	<br />47	细胞免疫六项
+	<br />48	尿沉渣：尿白细胞，尿管型细胞，尿红细胞，尿上皮细胞，尿细菌
+	<br />49	阴道分泌物(白带)检查
+	<br />50	胃蛋白酶原（PG）ⅠⅡ
+	<br />51	25-羟基维他命D
+	<br />52	糖化血红蛋白
+
+
+<?php } ?>
+<?php if ($type=='2'){?>
+	1	基础检查
+	<br />2	内科诊疗
+	<br />3	保健咨询
+	<br />4	通气功能检查
+	<br />5	外科诊疗：一次性直肠镜（含材料药费）
+	<br />6	眼科诊疗：电脑客观验光, 免散瞳眼底照相, 电脑非接触眼压(检查), 白内障摄片检查
+	<br />7	耳鼻喉诊疗：耳、鼻、鼻咽部、喉，间接喉镜及鼻咽镜检查
+	<br />8	口腔科诊疗：口腔颌面部、牙体牙髓、牙周组织、口腔黏膜等检查
+	<br />9	妇科诊疗：妇科检查（宫颈刮片、子宫双附件)，液基薄层细胞制片术（TCT），HPV
+	<br />10	女性粉红丝带套餐：乳房检查（触诊），乳腺数字化X线摄影（双侧）
+	<br />11	数字化摄影（DR）：胸部
+	<br />12	带电脑的多导联心电图
+	<br />13	彩色多普勒超声常规检查：肝，胆，脾，双肾
+	<br />14	浅表器官彩超：甲状腺
+	<br />15	颅内多普勒检查（TCD）
+	<br />16	磁卡、资料费、健康书籍
+	<br />17	数字化医疗影像数据及介质费
+	<br />18	13C呼气试验
+	<br />19	健康危险因素评估
+	<br />20	肝功能十一项：谷草转氨酶，r-谷氨酰转肽酶，谷丙转氨酶，碱性磷酸酶，总胆红素，总蛋白，直接胆红素，白蛋白，球蛋白，间接胆红素，白球比
+	<br />21	血脂五项：甘油三酯TG，总胆固醇Tch，高密度脂蛋白，低密度脂蛋白，脂蛋白(a)LP(a)
+	<br />22	肾功能二项：尿素氮，肌酐
+	<br />23	血常规(五分类)
+	<br />24	心血管四项：超敏CRP，同型半胱氨酸，纤维蛋白原，血浆凝血因子活性测定—Ⅷ
+	<br />25	胃蛋白酶原（PG）ⅠⅡ
+	<br />26	空腹血糖
+	<br />27	糖化血红蛋白
+	<br />28	血胰岛素
+	<br />29	血尿酸
+	<br />30	阴道分泌物检查—白带检查
+	<br />31	防癌七项：癌胚抗原，甲胎蛋白，CYFERA21-1，CA199，CA50，CA125（女）PSA（男），CA242
+	<br />32	尿11联：尿胆红素，尿蛋白质，尿白细胞，尿比重，尿胆原，尿葡萄糖，尿酸碱度，尿酮体，尿维生素C，尿亚硝酸盐，尿隐血
+	<br />33	乳酸脱氢酶LDH
+	<br />34	尿沉渣
+	<br />
+
+	<?php } ?>
+<?php if ($type=='3'){?>
+1	基础检查
+<br/>2	内科诊疗
+<br/>3	保健咨询
+<br/>4	外科诊疗
+	肛门直肠检查
+<br/>5	眼科诊疗：
+	眼底检查，裂隙灯
+<br/>6	耳鼻喉诊疗：
+	耳、鼻、鼻咽部、喉，间接喉镜及鼻咽镜检查
+<br/>7	口腔科诊疗：
+	口腔颌面部、牙体牙髓、牙周组织、口腔黏膜等检查
+<br/>8	妇科诊疗：
+	妇科检查（宫颈刮片、子宫双附件)
+	液基薄层细胞制片术（TCT）
+<br/>9	数字化摄影（DR）:
+	胸部
+<br/>10	带电脑的多导联心电图
+<br/>11	彩色多普勒超声常规检查：
+	肝，胆，脾，双肾
+<br/>12	磁卡、资料费
+<br/>13	13C呼气试验
+<br/>14	肝功能十一项：
+	谷草转氨酶，r-谷氨酰转肽酶，谷丙转氨酶，碱性磷酸酶，总胆红素，总蛋白，直接胆红素，白蛋白，球蛋白，间接胆红素，白球比
+<br/>15	血脂五项：
+	甘油三酯TG，总胆固醇Tch，高密度脂蛋白，低密度脂蛋白，脂蛋白a
+<br/>16	肾功能二项：
+	尿素氮，肌酐
+<br/>17	胃蛋白酶原（PG）ⅠⅡ
+<br/>18	超敏CRP
+<br/>19	防癌五项：
+	癌胚抗原，甲胎蛋白，CA199, CA125(女) ，PSA（男），CA242
+<br/>20	血常规(五分类)
+<br/>21	血尿酸
+<br/>22	阴道分泌物检查—白带检查
+<br/>23	空腹血糖
+<br/>24	糖化血红蛋白
+<br/>25	血胰岛素
+<br/>26	纤维蛋白原
+<br/>27	尿11联：
+	尿胆红素，尿蛋白质，尿白细胞，尿比重，尿胆原，尿葡萄糖，尿酸碱度，尿酮体，尿维生素C，尿亚硝酸盐，尿隐血
+<br/>28	乳酸脱氢酶LDH
+<br/>29	尿沉渣
+
+	
+
+<?php } ?>
+<?php if ($type=='4'){?>
+	1	基础检查
+<br/>2	内科诊疗
+<br/>3	保健咨询
+<br/>4	通气功能检查
+<br/>5	营养诊疗
+<br/>6	中医诊疗
+<br/>7	外科诊疗：
+	一次性直肠镜（含材料药费）
+<br/>8	眼科诊疗：
+	电脑视野，电脑客观验光，免散瞳眼底照相, 电脑非接触眼压(检查),白内障摄片检查，OCT（光学相干断层成像）
+<br/>9	耳鼻喉诊疗：
+	耳、鼻、鼻咽部、喉，间接喉镜及鼻咽镜检查，电测听（气导、骨导）
+<br/>10	口腔科诊疗：
+	口腔颌面部、牙体牙髓、牙周组织、口腔黏膜等检查, 口腔内镜
+<br/>11	13C呼气试验
+<br/>12	妇科诊疗：
+	妇科检查（宫颈刮片、子宫双附件)，液基薄层细胞制片术（TCT），人乳头瘤病毒（HPV）
+<br/>13	女性粉红丝带套餐：
+	乳房检查（触诊）
+<br/>14	乳腺数字化X线摄影（双侧）
+<br/>15	乳腺彩超全容积成像
+<br/>16	X线计算机体层(CT)平扫：
+	胸部
+<br/>17	计算机X线摄影（CR）：
+	口腔全景
+<br/>18	带电脑的多导联心电图
+<br/>19	24小时动态心电图
+<br/>20	彩色多普勒超声常规检查：
+	肝，胆，脾，双肾
+<br/>21	彩超常规检查：
+	前列腺
+<br/>22	彩超特殊检查：
+	颈血管
+<br/>23	浅表器官彩超：
+	甲状腺
+<br/>24	腔内彩超：
+	阴道
+<br/>25	颅内多普勒检查（TCD）
+<br/>26	心脏彩超
+<br/>27	人体成分分析
+<br/>28	动脉硬化检测
+<br/>29	骨密度（双侧）
+<br/>30	心理压力测试
+<br/>31	皮肤护理, 足疗, 保健服务
+<br/>32	磁卡、资料费、健康书籍
+<br/>33	数字化医疗影像数据及介质费
+<br/>34	疾病风险评估
+<br/>35	一氧化氮呼气测定
+<br/>36	肝功能十一项：
+	谷草转氨酶，r-谷氨酰转肽酶，谷丙转氨酶，碱性磷酸酶，总胆红素，总蛋白，直接胆红素，白蛋白，球蛋白，间接胆红素，白球比
+<br/>37	血脂七项：
+	甘油三酯，总胆固醇，高密度脂蛋白，低密度脂蛋白，脂蛋白(a)，APOA、APOB
+<br/>38	心血管六项：
+	超敏CRP，肌钙蛋白，同型半胱氨酸, 纤维蛋白原,凝血八因子Ⅷ，D-二聚体
+<br/>39	肾功能二项：
+	尿素氮，肌酐
+<br/>40	甲状腺五项：
+	促甲状腺激素，游离T3，游离T4，总T3，总T4
+<br/>41	乙肝两对半定量：
+	HBCAB，HBEAB，HBEAG，HBSAB，HBSAG
+<br/>42	丙肝抗体
+<br/>43	空腹血糖
+<br/>44	血胰岛素、血清C肽、糖化血清白蛋白
+<br/>45	血尿酸
+<br/>46	血常规(五分类)
+<br/>47	防癌十项：
+	癌胚抗原,甲胎蛋白, CYFERA21-1,CA199 ,CA50，鳞癌抗原，铁蛋白，PSA，游离PSA（男）CA153,CA125（女），CA242
+<br/>48	阴道分泌物（白带）检查
+<br/>49	血粘度测定
+<br/>50	特定蛋白：
+	免疫球蛋白（IGA，IGG，IGM），尿微量白蛋白，前白蛋白
+<br/>51	HBV DNA
+<br/>52	β2微球蛋白、乳酸脱氢酶LDH
+<br/>53	细胞免疫六项
+<br/>54	食物不耐受检测
+<br/>55	血清胱抑素测定(Cys-c)
+<br/>56	尿11联：
+	尿胆红素，尿蛋白质，尿白细胞，尿比重，尿胆原，尿葡萄糖，尿酸碱度，尿酮体，尿维生素C，尿亚硝酸盐，尿隐血
+<br/>57	尿沉渣：
+	尿白细胞，尿管型细胞，尿红细胞，尿上皮细胞，尿细菌
+<br/>58	大便隐血
+<br/>59	胃蛋白酶原（PG）ⅠⅡ
+<br/>60	25-羟基维他命D
+<br/>61	糖化血红蛋白
+<br/>62	前白蛋白
+<br/>63	β2微球蛋白
+<br/>64	细胞免疫六项
+<br/>65	尿沉渣：
+	尿白细胞，尿管型细胞，尿红细胞，尿上皮细胞，尿细菌
+<br/>66	阴道分泌物(白带)检查
+<br/>67	胃蛋白酶原（PG）ⅠⅡ
+<br/>68	25-羟基维他命D
+<br/>69	糖化血红蛋白
+
+<?php } ?>
+</div>
+	<div style="clear:both;height:0px;"></div>
+
+	<div style="background-color:#f2f5f5;line-height:50px;padding-left:40px;"id="check_type_torf">
+		可增加体检项目<a style="font-size:10px">（选择您需要的项目）</a>
+
+	</div>
+	<div style="clear:both;height:0px;"></div>
+
+	<div >
+		<span class="bor"style=""></span>
+		<a class="bor2"><input type="checkbox"onClick="changemoney('40','0');"id="check_0"/></a>
+		<a onclick="change('0');">
+			<span class="bor3">妇科疾病筛查</span>
+			<span class="bor1"id="detail_c_0"></span>
+		</a>
+
+	</div>
+	<div class="detail disnone"id="detail_0">
+		1	妇科诊疗，妇科检查：
+		检查阴道、子宫双附件，包括妇科肿瘤检查
+		<br/>2	细胞薄层涂片（TCT），人乳头瘤病毒（HPV）：
+		已婚女性(宫颈癌诊断金标准)
+		<br/>3	阴道分泌物检查—白带检查：
+		阴道炎症的诊断依据
+		<br/>4	腔内彩超—阴道（可选），彩超常规检查—妇科（可选）：
+		子宫、卵巢以及盆腔的良、恶性肿瘤及其它疾病的诊断依据
+		<br/>5	CA125（发光）：
+		卵巢癌的重要标志物，对卵巢上皮癌的敏感性可达约70%，加超声检查，50岁以上妇女筛查卵巢癌金标准
+
+	</div>
+
+	<div style="">
+		<a class="bor"style=""></a>
+		<a class="bor2"><input type="checkbox"onClick="changemoney('40','1');"id="check_1"/></a>
+		<a onclick="change('1');">
+			<span class="bor3">乳腺疾病筛查</span>
+			<span class="bor1"id="detail_c_1"></span>
+		</a>
+
+	</div>
+	<div class="detail disnone"id="detail_1">
+		1	乳房检查（触诊）：
+		乳腺各种良、恶性肿瘤及其他疾病的诊断依据
+		<br/>2	浅表器官彩超检查-乳房（可选）：
+		乳腺各种良、恶性肿瘤及其他疾病的诊断依据
+		<br/>3	乳腺彩超全容积成像（可选）：
+		三维成像分析乳腺各种良、恶性肿瘤及其它疾病的诊断依据
+		<br/>4	腔内彩超—阴道（可选），彩超常规检查—妇科（可选）：
+		子宫、卵巢以及盆腔的良、恶性肿瘤及其它疾病的诊断依据
+
+	</div>
+	<div style="">
+		<a class="bor"style=""></a>
+		<a class="bor2"><input type="checkbox"onClick="changemoney('40','2');"id="check_2"/></a>
+		<a onclick="change('2');">
+			<span class="bor3">心血管辅助检查</span>
+			<span class="bor1"id="detail_c_2"></span>
+		</a>
+
+	</div>
+	<div class="detail disnone"id="detail_2">
+		1	彩超特殊检查—颈血管（物理诊断科）：
+		颈动脉粥样硬化、狭窄的有无以及程度的诊断依据<br/>
+		2	心脏彩色多普勒超声（物理诊断科）：
+		冠心病、高心病、先天性疾病、各种原发及继发性心肌病、心脏瓣膜病的诊断依据<br/>
+		3	颅内多普勒检查（TCD）（物理诊断科）：
+		颅内椎动脉、基底动脉、大脑前中后动脉影像检查，检查颅内血管的供血情况<br/>
+		4	D-二聚体（检验科）：
+		反映纤维蛋白溶解功能<br/>
+		5	肌钙蛋白（检验科）：
+		诊断急性心肌梗死(AMI）金标准<br/>
+		6	血浆凝血因子活性测定—Ⅷ（检验科）：
+		凝血功能及高凝状态的提示
+
+	</div>
+	<div style="">
+		<a class="bor"style=""></a>
+		<a class="bor2"><input type="checkbox"onClick="changemoney('40','3');"id="check_3"/></a>
+		<a onclick="change('3');">
+			<span class="bor3">骨质疏松相关检查</span>
+			<span class="bor1"id="detail_c_3"></span>
+		</a>
+
+	</div>
+	<div class="detail disnone"id="detail_3">
+		1	25-羟基维他命D（检验科）：
+		低维生素D水平与骨质骨量、骨质疏松等有关<br/>
+		2	骨密度（双次）（放射科）：
+		骨质疏松、骨量减低的评估依据<br/>
+
+	</div>
+	<div style="">
+		<a class="bor"style=""></a>
+		<a class="bor2"><input type="checkbox"onClick="changemoney('40','4');"id="check_4"/></a>
+		<a onclick="change('4');">
+			<span class="bor3">男性疾病筛查</span>
+			<span class="bor1"id="detail_c_4"></span>
+		</a>
+
+	</div>
+	<div class="detail disnone"id="detail_4">
+		1	总前列腺特异性抗原测定(TPSA)（化学发光法)，游离前列腺特异性抗原测定(FPSA)（检验科）：
+		前列腺肿瘤的重要标志物<br/>
+		2	彩超常规检查—前列腺（物理诊断科）：
+		前列腺增生以及良、恶性肿瘤的诊断<br/>
+
+	</div>
+	<div style="">
+		<a class="bor"style=""></a>
+		<a class="bor2"><input type="checkbox"onClick="changemoney('40','5');"id="check_5"/></a>
+		<a onclick="change('5');">
+			<span class="bor3">胃部检查项目</span>
+			<span class="bor1"id="detail_c_5"></span>
+		</a>
+
+	</div>
+	<div class="detail disnone"id="detail_5">
+		1	胃蛋白酶原（PG）（检验科）：
+		胃蛋白酶原Ⅰ、胃蛋白酶原Ⅱ、胃蛋白酶原Ⅰ/Ⅱ，诊断和筛选胃粘膜萎缩性疾病<br/>
+
+		2	胃镜（内窥镜室）：
+		胃镜检查诊断可靠、安全性高。通过胃镜能顺次清晰地观察食管、胃、十二指肠球部及降部的黏膜状态，而且可以进行活体的病理学和细胞学检查。是发现早期上消化道肿瘤的最直接手段
+
+	</div>
+	<div style="">
+		<a class="bor"style=""></a>
+		<a class="bor2"><input type="checkbox"onClick="changemoney('40','6');"id="check_6"/></a>
+		<a onclick="change('6');">
+			<span class="bor3">外科新增项目</span>
+			<span class="bor1"id="detail_c_6"></span>
+		</a>
+
+	</div>
+	<div class="detail disnone"id="detail_6">
+		1	隐血试验，★新增：
+		<br/>大便隐血免疫双联检测：
+		消化道常规检查项目之一，是监测消化道出血的重要指征<br/>
+		2	粪便转铁蛋白测定（放射科）：
+		骨质疏松、骨量减低的评估依据<br/>
+	</div>
+	<div style="">
+		<a class="bor"style=""></a>
+		<a class="bor2"><input type="checkbox"onClick="changemoney('40','7');"id="check_7"/></a>
+		<a onclick="change('7');">
+			<span class="bor3">物理诊断新增项目</span>
+			<span class="bor1"id="detail_c_7"></span>
+		</a>
+
+	</div>
+	<div class="detail disnone"id="detail_7" >
+		1	电诊断（内脏脂肪测定）：<br/>
+		★新增：简单快速安全，利用世界首创的DUAL生物阻抗法，可以准确地算出内脏脂肪面积及内脏脂肪的储积情况<br/>
+
+	</div>
+	<p style="display:block;height:50px;padding-bottom:50px;">&nbsp;</p>
+</div>
+
+</div>
+
+<!--<div style="clear:both;height:50px;"></div>-->
+<div style="text-align:center;font-size:12px;position:fixed;width:100%;bottom:0;z-index:100">
+<a style="background-color:#307fe2;height:45px;width:100%;float:right;display:block;color:white;font-size:16px;"onClick="order_form('{$url}','{$type}');"><b>预&nbsp;&nbsp;约</b></a>
+<!--
+	<a class="">套餐价格：<span id="money">{$money}</span>元</a>
+	<a style="background-color:#307fe2;height:45px;width:120px;float:right;display:block;color:white;"onClick="order_form('{$url}','{$type}');"><b>预约</b></a>
+-->
+</div>
+<div style="clear:both;height:0px;"></div>
+</body>
+</html>

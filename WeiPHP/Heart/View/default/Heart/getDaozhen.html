@@ -1,0 +1,156 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8">
+    <link rel="stylesheet" type="text/css" href="/Public/Home/css/font-awesome.css?v=1438269094" media="all">
+	<link rel="stylesheet" type="text/css" href="/Public/Home/css/mobile_module.css?v=1438269094" media="all">
+    <script type="text/javascript" src="/Public/static/jquery-2.0.3.min.js"></script>
+    <script type="text/javascript" src="/Public/Home/js/prefixfree.min.js"></script>
+    <script type="text/javascript" src="/Public/Home/js/m/dialog.js?v=1438269094"></script>
+    <script type="text/javascript" src="/Public/Home/js/m/flipsnap.min.js"></script>
+    <script type="text/javascript" src="/Public/Home/js/m/mobile_module.js?v=1438269094"></script>
+    <script type="text/javascript" src="/Public/Home/js/admin_common.js?v=1438269094"></script>
+	<title></title>
+    <meta content="text/html; charset=utf-8" http-equiv="Content-Type">
+	<meta content="width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no" name="viewport">
+    <meta content="application/xhtml+xml;charset=UTF-8" http-equiv="Content-Type">
+    <meta content="no-cache,must-revalidate" http-equiv="Cache-Control">
+    <meta content="no-cache" http-equiv="pragma">
+    <meta content="0" http-equiv="expires">
+    <meta content="telephone=no, address=no" name="format-detection">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+    <link rel="shortcut icon" href="http://ben.com/favicon.ico">
+</head>	
+<link href="/Addons/CustomReply/View/default/Public/detail.css?v=1438269094" rel="stylesheet" type="text/css">
+<body id="weisite">
+<div class="container">
+	<header style="background:#2e393f; display:none">
+    	<!--<img class="logo" height="40" src="/Public/Home/images/logo.jpg"/>-->
+    </header>
+    <div class="detail top_line">
+
+    	<h6 class="title">体检导引单</h6>
+        <p class="info"><span class="colorless">{$user.CHECKDATE}</span></p>
+        <section class="content">
+				                <p style="text-align:left;">
+	<!-- <span style="line-height:1.5;font-size:14px;">床位号：</span><span lang="EN-US" style="line-height:1.5;font-size:14px;">909 </span> --><span style="line-height:1.5;font-family:宋体, sans-serif;font-size:14px;">姓名：{$user.NAME} </span><span style="line-height:1.5;font-family:宋体, sans-serif;font-size:14px;">体检号：{$user.INHOSPNO}</span> 
+</p>
+<p>
+	<span lang="EN-US" style="font-size:14px;"><span style="color:#000000;font-family:宋体, sans-serif;font-size:14px;">性别：<if condition="$user.SEX eq '1' ">男<elseif condition="$user.SEX eq '2' "/>女<else/>无</if> </span></span><span style="line-height:1.5;font-family:宋体, sans-serif;font-size:14px;">年龄：</span><span style="line-height:1.5;"> </span><span style="line-height:1.5;font-family:宋体, sans-serif;font-size:14px;">{$user.age}</span><span style="line-height:1.5;font-family:宋体, sans-serif;font-size:14px;">岁</span><span style="line-height:1.5;"></span><span style="line-height:1.5;"></span><span style="line-height:1.5;"></span><span style="line-height:1.5;"> </span> 
+</p>
+<br />
+<h3>体检流程</h3>
+<p><img src="/Resource/Ben/img/lc.jpg"/></p>
+
+<p>
+	<span style="font-size:14px;"><br />
+</span> 
+</p>
+<hr />
+<p>
+	<span style="font-size:14px;"><br />
+</span> 
+</p>
+<p>
+	<span style="font-size:14px;">注意：有 </span><span style="font-family:宋体, sans-serif;white-space:normal;font-size:14px;">■ </span><span style="font-size:12px;"><span style="font-size:14px;">标示的项目必须在空腹</span><span style="font-size:14px;">下检</span></span><span style="line-height:1.5;font-size:14px;">查</span> 
+</p>
+<p>
+	<span style="line-height:1.5;"><br />
+</span> 
+</p>
+<p>
+	<span style="font-size:14px;"><strong>空腹项目</strong></span> 
+</p>
+<volist name="kval" id="vo" >
+<p>
+	<span style="color:#000000;font-family:宋体,sans-serif;"><span style="white-space:normal;font-size:14px;">■ </span></span><span style="color:#000000;font-family:宋体, sans-serif;font-size:14px;">{$vo.ITEMNAME}</span> 
+</p>
+</volist>
+<p>
+	<span style="color:#000000;font-family:宋体, sans-serif;font-size:12px;"><br />
+</span> 
+</p>
+<volist name="nkval" id="nvo" >
+
+<span style="font-size:14px;"><strong>{$nvo[0]['groupnamenew']}</strong></span> 
+<p>
+	<volist name="nvo" id="nvoi" >
+	<span style="font-family:宋体, sans-serif;white-space:normal;font-size:14px;">□</span><span style="font-size:14px;">{$nvoi.ITEMNAME} </span> 
+	</volist>
+</p>
+<p>
+	<span style="font-size:12px;"><br />
+</span> 
+</p>
+</volist>
+
+<p>
+	<span style="color:#000000;font-family:宋体, sans-serif;font-size:12px;"><br />
+</span> 
+</p>
+<hr />
+<p>
+	<span style="font-size:14px;line-height:1.5;">温馨提示：</span>
+</p>
+<p>
+	<span style="font-size:14px;font-family:宋体, sans-serif;">1、尊敬的疗养员，以上是您本次来我院健康体检的主要项目流程。在诊疗过程中，您如遇到问题，敬请按时与楼层护</span><span style="font-size:14px;font-family:宋体, sans-serif;">士站联系，谢谢您的合作。</span>
+</p>
+<p>
+	<span style="line-height:1.5;"> </span><span style="font-size:14px;font-family:宋体, sans-serif;">2、彩超常规检查-腹部+双肾项目请先到诊疗中心三楼护士站预约；内科咨询项目请先到诊疗中心二楼护士站预约。</span> 
+</p>
+<p>
+	<span style="font-size:14px;font-family:宋体, sans-serif;"><br />
+</span>
+</p>
+<hr />
+<p>
+	<br />
+</p>
+
+<p style="text-align:center;">
+	<span style="font-size:14px;">祝您健康！</span> 
+</p>
+<p style="text-align:center;">
+	<span style="font-size:14px;"><img src="http://1251001145.cdn.myqcloud.com/1251001145/style/images/5.gif" _src="http://1251001145.cdn.myqcloud.com/1251001145/style/images/5.gif" style="white-space:normal;width:554px;margin:0px auto;display:block;" /> </span> 
+</p>
+<p style="white-space:normal;font-family:sans-serif;font-size:16px;line-height:normal;">
+	<br />
+</p>
+<p style="white-space:normal;font-family:sans-serif;font-size:16px;line-height:normal;">
+	<img src="http://www.ben.cn/tpl/static/ueditor/php/upload1/20150611/1433989196422442.png" _src="http://www.ben.cn/tpl/static/ueditor/php/upload1//20150611/1433989196422442.png" /> 
+</p>        </section>
+    </div>
+</div>
+<div class="bottom_nav_blank"/>
+</body>
+</html>
+<script type="text/javascript">
+$(function(){
+	var imgArray = new Array();
+	var img_base = "http://ben.com";
+	$(".detail img").each(function(){	
+	     var src = $(this).attr("src");
+	     var key1 = src.indexOf('http') ;
+		 var key2 = src.indexOf('Uploads/') ;
+		 
+		 if(key1=='-1' && key2>0){
+			 src = img_base + src;
+			 $(this).attr("src", src);
+		 }
+		 
+		 imgArray.push( src );//数组,网页里面所有要查看大图的图片地址列表
+	})
+	console.log(imgArray);
+	$(".detail img").bind("click",function(){
+		var currentImg = $(this).attr("src");//当前图片的地址
+
+		  if(typeof WeixinJSBridge !=="undefined"){
+			WeixinJSBridge.invoke("imagePreview", {
+			  current: currentImg,//查看的当前图片的地址
+			  urls:imgArray,//数组,网页里面所有要查看大图的图片地址列表
+			});
+		   } 
+	})	
+});
+</script>

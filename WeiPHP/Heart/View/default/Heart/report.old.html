@@ -1,0 +1,102 @@
+<!DOCTYPE HTML>
+<html>
+	<head>
+		<meta charset="UTF-8" />
+		<meta name="viewport" content="width=device-width, user-scalable=0, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+		<style type="text/css">
+			* {
+				margin: 0;
+				padding: 0;
+			}
+			body{width:100%;min-height:368px;background:#f3f5f6;}
+			a {
+				text-transform: none;
+				text-decoration: none;
+				color: #000;
+			}
+			a:hover {
+				text-transform: none;
+				text-decoration: none;
+				color: #000;
+			}
+			li {
+				list-style: none;
+			}
+			.content {
+			background:#FFF;
+				margin: 6% 4%;
+				border-left: 1px solid #ab9c91;
+				border-right: 1px solid #ab9c91;
+				border-bottom: 1px solid #ab9c91;
+				border-radius: 6px;
+				-moz-border-radius: 6px;
+				-webkit-border-radius: 6px;
+			}
+			.c-head {
+				line-height: 35px;
+				height: 35px;				
+				font-weight:600;
+				background: #2d77d3;
+				border-radius: 5px 5px 0 0;
+				-webkit-border-radius: 5px 5px 0 0;
+				-moz-border-radius: 5px 5px 0 0;
+				padding-left: 30px;
+				font-size: 15px;
+				color: #FFFFFF;
+			}
+			.c-37e {			
+				display: block;				
+				font-size:15px;
+				height: 30px;
+				line-height: 30px;
+				padding-left: 30px;							
+				color: #307fe2;
+			}
+			.checkout {
+				display: inline-block;				
+			}
+			.checkout li {
+			overflow:hidden;
+			  padding-left: 4%;
+				float: left;
+				display: block;
+				width: 45.4%;
+				height: 60px;
+				line-height: 60px;
+			}
+			.checkout li:nth-child(odd){
+			border-top: 1px solid #ab9c91;
+			border-right: 1px solid #ab9c91;
+			}
+			.checkout li:nth-child(even){			
+			border-top: 1px solid #ab9c91;
+			  width: 46.2%;
+			}
+			.ico-right {
+				display: inline-block;
+				margin-right: 8px;
+				height: 10px;
+				width: 10px;
+				background: url(/Resource/Ben/img/ico-right.png) no-repeat;
+				background-size:contain;
+			}
+			
+		</style>
+		<title>检验科报告</title>
+	</head>
+
+	<body>
+		<div class="content">
+			<div class="c-head">检验科就诊项</div>
+			<a href="{:U('/addon/Heart/Heart/checkf2')}" ><div class="c-37e">只看非正常项
+			</div></a>
+			<ul class="checkout">				
+				<volist name="reports" id="vo" >
+				<li><a href="{:U("/addon/Heart/Heart/checks/checkname/$vo[CHECKITEMNAME]")}" ><i class="ico-right"></i><span>{$vo.ITEMNAME}_{$vo.CHECKITEMNAME}</span></a>
+				</li>
+				</volist>
+			</ul>
+		</div>
+	</body>
+
+</html>

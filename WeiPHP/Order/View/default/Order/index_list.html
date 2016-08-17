@@ -1,0 +1,128 @@
+<!DOCTYPE html>
+<html lang="zh-cn">
+<head>
+<meta charset="utf-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge"/>
+<meta name="viewport" content="width=device-width, initispanl-scale=1, user-scalable=no"/>
+<title>健检预约</title>
+<script src="public/static/jquery-2.0.3.min.js"></script>
+
+<script type="text/javascript">
+
+</script>
+<style>
+img{background-size:contain;}
+div{
+	height:48px;
+	line-height:48px;
+	width:100%;
+	margin-bottom:4px;
+	background-color:#fff;
+	border-bottom:1px #dcdcdc solid;
+	border-top:1px #dcdcdc solid;
+	color:#307fe2;
+	
+}
+.bor{
+	float:left;
+	display:block;
+	border-left:10px solid #307fe2;
+	height:48px;
+}
+.bor2{
+	margin-left:20px;
+	float:left;
+	display:block;
+	width:200px;
+}
+.bor3{
+	font-size:14px;
+}
+.bor1{
+	margin-right:20px;
+	float:right;
+	display:block;
+	
+}
+a{text-decoration:none;color:#307fe2}
+a:link{text-decoration:none;color:#307fe2}
+a:visited{text-decoration:none;color:#307fe2}
+a:hover{text-decoration:none;color:#307fe2}
+a:active{text-decoration:none;color:#307fe2}
+.dis{display:block}
+.blue{
+	color:#307fe2;
+}
+.ico_right_new {
+	
+	display: inline-block;
+	vertical-align: middle;	
+	margin-top: 20px;
+	width: 6px;
+	height: 12px;
+	background: url(/Resource/Ben/img/ico_right_new.png) no-repeat;
+	background-size:contain;
+}
+</style>
+</head>
+<body style="background-color:#f2f5f5;margin:0px">
+<img src="Resource/tzj/images/order_top.jpg?test2" width="100%"/>
+<div style="">
+<a class="dis" href="{$url_order}">
+	<span style="margin-left:30px;float:left;display:block;">我的预约</span>
+	<span class="bor1 ico_right_new"></span>
+<a>
+</div>
+
+
+<div style="">
+	<a class="dis" href="{:U('/addon/Order/Order/index_order/type/0')}">
+		<span class="bor"></span>
+		<span class="bor2">华疗贴心健检服务-基础档</span>
+		<!--<span class="bor3">价格1642元(价格以实际为准)</span>-->
+		<span class="bor1 ico_right_new"></span>
+	</a>
+</div>
+
+
+<div style="">
+<a class="dis" href="{:U('/addon/Order/Order/index_order/type/1')}">
+	<span class="bor"style=""></span>
+	<span class="bor2">华疗贴心健检服务-A档</span>
+	<!--<span class="bor3">价格男4173元/女4914元</span>-->
+	<span class="bor1 ico_right_new"></span>
+</a>
+</div>
+
+
+<div style="">
+<a class="dis" href="{:U('/addon/Order/Order/index_order/type/2')}">
+	<span class="bor"style=""></span>
+	<span class="bor2">华疗贴心健检服务-B档</span>
+	<!--<span class="bor3">价格男2239元/女2935元</span>-->
+	<span class="bor1 ico_right_new"></span>
+</a>
+</div>
+
+
+<div style="">
+<a class="dis" href="{:U('/addon/Order/Order/index_order/type/3')}">
+	<span class="bor"style=""></span>
+	<span class="bor2">华疗贴心健检服务-C档</span>
+	<!--<span class="bor3">价格男1242元/女1444元</span>-->
+	<span class="bor1 ico_right_new"></span>
+</a>
+</div>
+
+
+<div style="">
+<a class="dis" href="{:U('/addon/Order/Order/index_order/type/4')}">
+	<span class="bor"style=""></span>
+	<span class="bor2">华疗贴心健检服务-VIP档</span>
+	<!--<span class="bor3">价格男6288元/女7380元</span>-->
+	<span class="bor1 ico_right_new"></span>
+</a>
+</div>
+<div style="clear:both;height:0px;border: 0;"></div>
+</body>
+</html>

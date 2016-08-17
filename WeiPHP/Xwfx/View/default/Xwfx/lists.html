@@ -1,0 +1,193 @@
+<extend name="Base/common" />
+<block name="body">
+<script type="text/javascript" src="Public/static/jquery-2.0.3.min.js"></script>
+<script type="text/javascript" src="Public/static/highcharts-4.0.1/js/highcharts.js"></script>
+<script type="text/javascript" src="Public/static/highcharts-4.0.1/js/modules/exporting.js"></script>
+<script type="text/javascript">
+$(function () {
+    $('#container').highcharts({
+        title: {
+            text: '图文分析统计折线图',
+            x: -20 //center
+        },
+        subtitle: {
+            text: '',
+            x: -20
+        },
+        xAxis: {
+            categories: [{$time_new}]
+        },
+        yAxis: {
+            title: {
+                text: '次数'
+            },
+            plotLines: [{
+                value: 0,
+                width: 1,
+                color: '#808080'
+            }]
+        },
+        tooltip: {
+            //valueSuffix: '笔'
+            headerFormat: '<span style="-size:10px">{point.key}</span><table>',
+            pointFormat: '<tr><td style="color:{series.color};padding:0">{series.name}: </td>' +
+                '<td style="padding:0；"><b>{point.y:0f} 次</b></td></tr>',
+            footerFormat: '</table>',
+            shared: true,
+            useHTML: true
+        },
+        legend: {
+            layout: 'vertical',
+            align: 'right',
+            verticalAlign: 'middle',
+            borderWidth: 0
+        },
+        series: [{
+            name: '图文阅读人数',
+            data: [{$int_page_read_user_new}]
+        },
+		{
+            name: '图文阅读次数',
+            data: [{$int_page_read_count_new}]
+        },
+		{
+            name: '原文阅读人数',
+            data: [{$ori_page_read_user_new}]
+        },
+		{
+            name: '原文阅读次数',
+            data: [{$ori_page_read_count_new}]
+        },
+		{
+            name: '分享的人数',
+            data: [{$share_user_new}]
+        },
+		{
+            name: '分享的次数',
+            data: [{$share_count_new}]
+        },
+		{
+            name: '收藏的人数',
+            data: [{$add_to_fav_user_new}]
+        },
+		{
+            name: '收藏的次数',
+            data: [{$add_to_fav_count_new}]
+        }
+		]
+    });
+});
+
+
+</script>
+  <div class="span9 page_message">
+    <section id="contents"> 
+      <ul class="tab-nav nav">
+		<volist name="nav" id="nav">
+        <li class="{$nav.class}"><a href="{$nav.url}">{$nav.title}<b class="arrow fa fa-sort-up"></b></a></li>
+		</volist>
+      </ul>
+        
+      <div class="table-bar">
+	 <div class="fl">
+          <empty name="model.extend">
+			<div class="tools">                
+			</div>
+          </empty>
+        </div>
+         <!-- 高级搜索 -->		
+        <div class="search-form fr cf">
+			<div style="float:left;color:#f00;height:30px;line-height:30px;margin-right:20px;">请输入结束日期:</div>
+          <div class="sleft">
+          <php>empty($search_key) && $search_key=$model['search_key'];empty($search_key) && $search_key='title';</php>
+		  <!--
+           <input style="border-right:1px solid #eee;margin-right:20px;" type="date" name="begin_date" class="search-input" id="stime" value="{:I($search_key)}" placeholder="请输入开始日期">
+		   -->
+		   <input type="date" name="end_date"  id="endtime" class="search-input" value="{$time}" placeholder="请输入结束日期">
+            <a class="sch-btn" href="javascript:;" id="search" url="{:U('lists','model='.$model['name'],false)}"><i class="btn-search"></i></a> </div>
+        </div>
+		
+      </div>
+      
+      <!-- 数据列表 -->
+      <div class="data-table">
+        <div class="table-striped">
+          <table cellpadding="0" cellspacing="1">
+            <!-- 表头 -->
+            <thead>
+              <tr>
+			  <!--
+                <th class="row-selected row-selected"> 
+				<input class="check-all" type="checkbox">
+                </th>
+				 -->
+				 <th > 
+					日期
+                </th>
+					<th>图文阅读人数</th>
+					<th>图文阅读次数</th>
+					<th>原文阅读人数</th>
+					<th>原文阅读次数</th>
+					<th>分享的人数</th>
+					<th>分享的次数</th>
+					<th>收藏的人数</th>
+					<th>收藏的次数</th>
+              </tr>
+            </thead>
+            
+            <!-- 列表 -->
+            <tbody>
+              <volist name="data" id="data1">
+			  
+                <tr>
+					<td>{$data1.time}</td>
+					
+                  <volist name="data1.list" id="grid">
+                    <td>{$grid.int_page_read_user}</td>
+					<td>{$grid.int_page_read_count}</td>
+					<td>{$grid.ori_page_read_user}</td>
+					<td>{$grid.ori_page_read_count}</td>
+					<td>{$grid.share_user}</td>
+					<td>{$grid.share_count}</td>
+					<td>{$grid.add_to_fav_user}</td>
+					<td>{$grid.add_to_fav_count}</td>
+                  </volist>
+                </tr>
+				
+              </volist>
+            </tbody>
+          </table>
+        </div>
+      </div>
+	  <div id="container"></div>
+      <div class="page"> {$_page|default=''} </div>
+    </section>
+  </div>
+</block>
+<block name="script"> 
+  <script type="text/javascript">
+$(function(){
+	//搜索功能
+	$("#search").click(function(){
+		var url = $(this).attr('url');
+        var query  = $('.search-form').find('input').serialize();
+        query = query.replace(/(&|^)(\w*?\d*?\-*?_*?)*?=?((?=&)|(?=$))/g,'');
+        query = query.replace(/^&/g,'');
+        if( url.indexOf('?')>0 ){
+            url += '&' + query;
+        }else{
+            url += '?' + query;
+        }
+		window.location.href = url;
+	});
+
+    //回车自动提交
+    $('.search-form').find('input').keyup(function(event){
+        if(event.keyCode===13){
+            $("#search").click();
+        }
+    });
+
+})
+</script>  
+</block>

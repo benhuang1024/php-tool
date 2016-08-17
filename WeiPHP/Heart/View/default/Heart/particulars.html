@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html>
+
+	<head>
+		<meta charset="utf-8" />
+		<meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no" />
+		<link rel="stylesheet" type="text/css" href="/Resource/Ben/css/particulars.1.1.9.css"/>
+		<title>个人中心</title>
+		<style>
+		.foot{position:fixed;bottom:0;width:100%;text-align:center;}
+		.foot li a{line-height:53px;}
+		.foot li a span{color:#3381E2;}
+		</style>
+	</head>
+
+	<body>
+		<div class="grzx">
+		<a href="{:U('index')}" >
+			 <i class="user-img" style="background: url({$data.imgPath}) no-repeat;background-size:contain"></i>
+			 	<div class="matter">
+				<ul>
+					<li><span>{$data.name}</span>
+					</li>
+					<li><span>疗养号:</span><span>{$data.lyh}</span>
+					</li>				
+				</ul>
+			</div>
+			 <span class="ico-go1"></span></a>
+		</div>
+		<ul class="menu">
+			<li>
+				<a href="{:U('subscribe')}" ><span class="ico ico-wdyy"></span><span>我的预约</span><span class="ico-go"></span></a>
+			</li>
+			<li>
+				<a href="{:U('/addon/Myreport/Myreport/index')}" ><span class="ico ico-wdbg"></span><span>我的报告</span><span class="ico-go"></span></a>
+			</li>
+			<li>
+					<a href="{:U('/addon/Myreport/Myreport/consumption')}" ><span class="ico ico-wdxf"></span><span>我的消费</span><span class="ico-go"></span></a>
+			</li>
+			<li>
+				<span class="ico ico-qtxx"></span><span>其他信息</span><span class="ico-go"></span>
+			</li>
+		</ul>
+		
+		<ul class="menu foot">
+			<li>
+				<a href="{:U('quit')}" ><span>退出帐号</span></a>
+			</li>
+			
+		</ul>
+	</body>
+
+</html>

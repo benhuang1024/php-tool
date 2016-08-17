@@ -1,0 +1,41 @@
+<extend name="Base/common" />
+<block name="body">
+  <div class="span9 page_message">
+    <section id="contents"> 
+      <ul class="tab-nav nav">
+		<volist name="nav" id="nav">
+        <li class="{$nav.class}"><a href="{$nav.url}">{$nav.title}<b class="arrow fa fa-sort-up"></b></a></li>
+		</volist>
+      </ul>
+      
+      <div class="data-table">
+        <div class="table-striped">
+          <table cellpadding="0" cellspacing="1">
+            <thead>
+              <tr>
+				  <th width="25%">时间</th>
+                  <th width="25%">消息发送人数</th>
+				  <th width="25%">消息发送次数</th>
+				  <th width="25%">人均发送次数</th>
+              </tr>
+            </thead>
+            <tbody>
+              <volist name="data" id="data1">
+			  
+                <tr>
+					 <td>暂无</td>
+                    <td>暂无</td>
+					<td>暂无</td>
+					<td>暂无</td>
+                 
+                </tr>
+				
+              </volist>
+            </tbody>
+          </table>
+        </div>
+      </div>
+      <div class="page"> {$_page|default=''} </div>
+    </section>
+  </div>
+</block>

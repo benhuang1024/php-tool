@@ -1,0 +1,264 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" /> 
+<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+	<title>关键词排名查询</title>
+	<link rel="shortcut icon" href="favicon.ico" type="image/vnd.microsoft.icon">
+<link rel="icon" href="favicon.ico" type="image/vnd.microsoft.icon">
+
+<link rel="stylesheet" href="http://cdn.bootcss.com/bootstrap/3.2.0/css/bootstrap.min.css">
+<!-- <script src="http://libs.baidu.com/jquery/2.0.0/jquery.min.js"></script> -->
+<style>
+body{/* fallback */
+			background-color:#5cb85c;
+			/* chrome 2+, safari 4+; multiple color stops */
+			background-image:-webkit-gradient(linear,left bottom,left top,color-stop(0.32,#080A3e),color-stop(0.66,#102c7d), color-stop(0.83,#5cb85c));
+			/* chrome 10+, safari 5.1+ */
+			background-image:-webkit-linear-gradient(#080A3e, #5cb85c);
+			/* firefox; multiple color stops */
+			background-image:-moz-linear-gradient(top,#080A3e, #5cb85c);
+			/* ie 6+ */
+			filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#063053', endColorstr='#5cb85c');
+			/* ie8 + */
+			-ms-filter: "progid:DXImageTransform.Microsoft.gradient(startColorstr='#063053', endColorstr='#5cb85c')";
+			/* ie10 */
+			background-image: -ms-linear-gradient(#080A3e, #5cb85c);
+			/* opera 11.1 */
+			background-image: -o-linear-gradient(#080A3e, #5cb85c);
+			/* The "standard" */
+			background-image: linear-gradient(#080A3e, #5cb85c);
+}
+.header{margin:auto;margin-top:4%;width:87%;color:#fff;}
+.content{margin:auto;width:90%;color:#fff;margin-bottom: 14px;}
+/*.form-control{width:500px;height: 400px;}*/
+#pp1,#pp2{    margin-left: 20px;padding: 0;border-radius: 6px;-webkit-border-radius: 6px;-moz-border-radius: 6px;-ms-border-radius: 6px;line-height:30px;background-color: #38bbff;}
+#pp1 p,#pp2 p{padding-left: 10px;}
+#pp1 p span,#pp2 p span{color:#fefefe ;}
+#submit{margin:20px;width: 20%;height: 40px;letter-spacing: 10px;font-size: 20px;border-radius: 15px;-webkit-border-radius: 15px;-moz-border-radius: 15px;-ms-border-radius: 15px;border: 1px solid rgba(255,255,255,0.25);color: rgba(255,255,255,0.5);background-color: rgba(255,255,255,0.05);}
+#submit:hover{background-color: #fff;color: #31708f;font-weight: 800;font-size: 24px;}
+.footer{    margin-top: 15px;border-top: 1px solid rgba(255,255,255,0.3);height: 68px; width: 90%; margin: auto;color: #fff;}
+.contect{text-align: center;height: 50px;line-height: 50px;}
+.footer ul li{float: left;width: 25%;height:40px;}
+.spinner {
+	margin: 220px auto;
+	width: 60px;
+	height: 60px;
+	position: relative;
+}
+
+.container1 > div, .container2 > div, .container3 > div {
+	width: 18px;
+	height: 18px;
+	background-color: #00E0B7;
+
+	border-radius: 100%;
+	position: absolute;
+	-webkit-animation: bouncedelay 1.2s infinite ease-in-out;
+	animation: bouncedelay 1.2s infinite ease-in-out;
+	-webkit-animation-fill-mode: both;
+	animation-fill-mode: both;
+}
+
+.spinner .spinner-container {
+	position: absolute;
+	width: 100%;
+	height: 100%;
+}
+
+.container2 {
+	-webkit-transform: rotateZ(45deg);
+	transform: rotateZ(45deg);
+}
+
+.container3 {
+	-webkit-transform: rotateZ(90deg);
+	transform: rotateZ(90deg);
+}
+
+.circle1 { top: 0; left: 0; }
+.circle2 { top: 0; right: 0; }
+.circle3 { right: 0; bottom: 0; }
+.circle4 { left: 0; bottom: 0; }
+
+.container2 .circle1 {
+	-webkit-animation-delay: -1.1s;
+	animation-delay: -1.1s;
+}
+
+.container3 .circle1 {
+	-webkit-animation-delay: -1.0s;
+	animation-delay: -1.0s;
+}
+
+.container1 .circle2 {
+	-webkit-animation-delay: -0.9s;
+	animation-delay: -0.9s;
+}
+
+.container2 .circle2 {
+	-webkit-animation-delay: -0.8s;
+	animation-delay: -0.8s;
+}
+
+.container3 .circle2 {
+	-webkit-animation-delay: -0.7s;
+	animation-delay: -0.7s;
+}
+
+.container1 .circle3 {
+	-webkit-animation-delay: -0.6s;
+	animation-delay: -0.6s;
+}
+
+.container2 .circle3 {
+	-webkit-animation-delay: -0.5s;
+	animation-delay: -0.5s;
+}
+
+.container3 .circle3 {
+	-webkit-animation-delay: -0.4s;
+	animation-delay: -0.4s;
+}
+
+.container1 .circle4 {
+	-webkit-animation-delay: -0.3s;
+	animation-delay: -0.3s;
+}
+
+.container2 .circle4 {
+	-webkit-animation-delay: -0.2s;
+	animation-delay: -0.2s;
+}
+
+.container3 .circle4 {
+	-webkit-animation-delay: -0.1s;
+	animation-delay: -0.1s;
+}
+
+@-webkit-keyframes bouncedelay {
+	0%, 80%, 100% { -webkit-transform: scale(0.0) }
+	40% { -webkit-transform: scale(1.0) }
+}
+
+@keyframes bouncedelay {
+	0%, 80%, 100% {
+		transform: scale(0.0);
+		-webkit-transform: scale(0.0);
+	} 40% {
+		  transform: scale(1.0);
+		  -webkit-transform: scale(1.0);
+	  }
+}
+.load-model{
+	position: fixed;
+	top: 0;
+	background-color: #E8E8E8;
+	opacity: .6;
+	width: 100%;
+	height: 100%;
+	text-align: center;
+}
+
+</style>
+</head>
+<body>
+<div class="stars">  
+</div>
+
+<div class="header">
+	<div class="row-fluid">
+		<div class="span12">
+		<h2>关键词排名查询</h2>
+		<h4>两种采集方式不同(单条采集只能处理一个URL),关闭数据处理(选中后加快检测速度,影响数据正常统计),优先使用谷歌浏览器.</h4>
+		</div>
+	</div>
+</div>
+
+<div class="content">
+<form name="form" id="form" action="" method="post">
+	<div class="pull-left col-md-5" id="pp1"><p>输入关键词,格式:<span class="text-danger">关键词-换行</span></p>
+	<textarea class="form-control"  name="keywords" style="height: 400px;min-width: 500px;"  value="" >	
+	</textarea>
+	</div>
+	<div class="pull-left col-md-5" id="pp2"><p>输入展示URL,格式:<span class="text-danger">URL-换行</span></p>
+	<textarea class="form-control" name="urls" style="height: 400px;min-width: 500px;"  value="" >
+	</textarea>
+	</div>
+	<div class="clearfix"></div>
+	<div class="checkbox">
+		<label>
+			<input type="checkbox" name="closesql" id="closesql" value="closesql" >
+			关闭数据处理
+		</label>
+	</div>
+	<div class="clearfix"></div>
+	<input type="submit" name="submit" id="submit" value="腋臭" onclick="inSearch(3)"/>
+	<input type="submit" name="submit" id="submit" value="多条检测" onclick="inSearch(1)"/>
+	<input type="submit" name="submit" id="submit" value="单条检测" onclick="inSearch(2)"/>
+	<input type="submit" name="submit" id="submit" value="获取非url" onclick="inSearch(4)"/>
+	<input type="submit" name="submit" id="submit" value="pc" onclick="inSearch(5)"/>
+</form>
+</div>
+
+<div class="footer">
+		<br />
+		<ul>
+		<li href="#" target="_blank">author:ben & amy0724</li>
+		<li href="#" target="_blank">E-mail:benhuang1024@163.com</li>
+		</ul>
+</div>
+<div id="load-model" class="load-model" style="display: none">
+	<div class="spinner">
+		<div class="spinner-container container1">
+			<div class="circle1"></div>
+			<div class="circle2"></div>
+			<div class="circle3"></div>
+			<div class="circle4"></div>
+		</div>
+		<div class="spinner-container container2">
+			<div class="circle1"></div>
+			<div class="circle2"></div>
+			<div class="circle3"></div>
+			<div class="circle4"></div>
+		</div>
+		<div class="spinner-container container3">
+			<div class="circle1"></div>
+			<div class="circle2"></div>
+			<div class="circle3"></div>
+			<div class="circle4"></div>
+		</div>
+		<div>
+			<h3>Loading...</h3>
+		</div>
+	</div>
+</div>
+
+
+<script>
+	function inSearch(id){
+		var id = id;
+		switch (id){
+			case 1:
+				document.getElementById("form").action = 'search.php';
+				break;
+			case 2:
+				document.getElementById("form").action = 'searchOld.php';
+				break;
+			case 3:
+				document.getElementById("form").action = 'newSearch.php';
+				break;
+			case 4:
+				document.getElementById("form").action = 'searchKey.php';
+				break;
+					case 5:
+				document.getElementById("form").action = 'searchPc.php';
+				break;
+		}
+		document.getElementById("load-model").style.display = 'block';
+		document.getElementById("form").submit();
+
+	}
+</script>
+</body>
+</html>

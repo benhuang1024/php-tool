@@ -1,0 +1,111 @@
+<extend name="Base/common" />
+<block name="body">
+<script type="text/javascript" src="Public/static/jquery-2.0.3.min.js"></script>
+<script type="text/javascript" src="Public/static/highcharts-4.0.1/js/highcharts.js"></script>
+<script type="text/javascript" src="Public/static/highcharts-4.0.1/js/modules/exporting.js"></script>
+<script type="text/javascript">
+
+$(function () {
+    $('#container').highcharts({
+        title: {
+            text: '消息数据趋势图',
+            x: -20 //center
+        },
+        subtitle: {
+            text: '',
+            x: -20
+        },
+        xAxis: {
+            categories: [{$time_new}]
+        },
+        yAxis: {
+            title: {
+                text: '消息发送人数'
+            },
+            plotLines: [{
+                value: 0,
+                width: 1,
+                color: '#808080'
+            }]
+        },
+        tooltip: {
+            valueSuffix: '人'
+        },
+        legend: {
+            layout: 'vertical',
+            align: 'right',
+            verticalAlign: 'middle',
+            borderWidth: 0
+        },
+        series: [{
+            name: '消息发送人数',
+            data: [{$msg_user}]
+        }]
+    });
+});
+	
+
+</script>
+  <div class="span9 page_message">
+    <section id="contents"> 
+      <ul class="tab-nav nav">
+		<volist name="nav" id="nav">
+        <li class="{$nav.class}"><a href="{$nav.url}">{$nav.title}<b class="arrow fa fa-sort-up"></b></a></li>
+		</volist>
+		
+      </ul>
+	   
+      <div class="table-bar">
+        <div class="fl">
+          <empty name="model.extend">
+			<div class="tools">                
+			</div>
+          </empty>
+        </div>
+        <!-- 高级搜索 -->
+       <div class="search-form fr cf">
+			<div style="float:left;color:#f00;height:30px;line-height:30px;margin-right:20px;">输入日期区间:</div>
+          <div class="sleft">
+          <form id="formid"  name= "myform" method = 'post'  action = '{:U('searches','model='.$model['name'],false)}'>
+           <input style="border-right:1px solid #eee;margin-right:20px;" type="date" name="begin_date" class="search-input" value="{:I($search_key)}" placeholder="请输入开始日期">
+		   <input type="date" name="end_date" class="search-input" value="{:I($search_key)}" placeholder="请输入结束日期">
+			<a class="sch-btn" href="javascript:;" id="search"><i class="btn-searchs">
+			<input type="submit" style="BACKGROUND-COLOR: transparent;BORDER-BOTTOM: #ffffff 0px solid;BORDER-LEFT: #ffffff 0px solid;BORDER-RIGHT: #ffffff 0px solid;BORDER-TOP: #ffffff 0px solid;COLOR: #ffffff;HEIGHT: 26px;border-color: #ffffff #ffffff #ffffff #ffffff; font-size: 1pt"></i></a> 
+			</form>
+			</div>
+        </div>
+		
+      </div>
+        
+      <div class="data-table">
+        <div class="table-striped">
+          <table cellpadding="0" cellspacing="1">
+            <thead>
+              <tr>
+				  <th width="25%">时间</th>
+                  <th width="25%">消息发送人数</th>
+				  <th width="25%">消息发送次数</th>
+				  <th width="25%">人均发送次数</th>
+              </tr>
+            </thead>
+            <tbody>
+              <volist name="data" id="data1">
+			  
+                <tr>
+					<td>{$data1.ref_date}</td>
+                    <td>{$data1.msg_user}</td>
+					<td>{$data1.msg_count}</td>
+					<td>{$data1.avgs}</td>
+             
+                </tr>
+				
+              </volist>
+            </tbody>
+          </table>
+        </div>
+      </div>
+      <div class="page"> {$page|default=''} </div>
+    </section>
+  </div>
+   <div id="container" style="min-width:700px;height:400px"></div>
+</block>

@@ -1,0 +1,214 @@
+<!DOCTYPE html>
+<html>
+
+	<head>
+		<meta charset="utf-8" />
+		<meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no" />
+			 
+		<script src="Resource/tzj/css/jquery-latest.js"></script>
+		<title>综合报告</title>
+		<style>
+	
+* {
+	border: 0;
+	margin: 0;
+	padding: 0
+}
+../img {
+	vertical-align: bottom
+}
+body {
+	min-height: 568px;
+	background: #fff;
+	font-family: "微软雅黑", 'Microsoft Yahei', arial, "宋体", sans-serif;
+	font-size: 1em;
+}
+li {
+	list-style: none
+}
+
+
+.jl {
+	position: fixed;
+	top: 0;
+	/*float:left;*/
+	width:50%;
+	height:47px;
+	line-height:47px;
+	text-align:center;
+	color:#307fe2;
+	background: #fff;
+	border-bottom:1px solid #e5e5e5;
+}
+
+.jy {
+	position: fixed;
+	top: 0;
+	left:50%;
+	/*float:left;*/
+	width:50%;
+	height:47px;
+	line-height:47px;
+	text-align:center;
+	background: #fff;
+	border-bottom:1px solid #e5e5e5;
+}
+
+
+.jls {
+	/*border-bottom: 1px solid #E8E8E8;
+	border-top: 1px solid #E8E8E8;	*/
+	background: #FFFFFF;
+	font-family: "微软雅黑";
+	font-size: 14px;
+	color: black;
+	padding-left: 30px;
+	overflow:hidden;
+	margin-top: 48px;
+}
+
+.jls  li {
+    height:auto;
+	line-height:50px;
+}
+
+.suggess {
+	/*border-top: 1px solid #E8E8E8;*/
+	margin-top: 48px;
+	background: #FFFFFF;
+	font-family: "微软雅黑";
+	font-size: 14px;
+	color: black;
+	padding-left: 30px;
+	overflow:hidden;
+	bottom:0px;
+}
+
+.suggess  li {
+    
+	height:auto;
+	line-height:50px;
+}
+
+
+.jl a{ display:block;width:100%;height:94px;}
+
+.ico1 {
+  
+	display: inline-block;
+	 text-align: center;
+	float: right;
+	background-size:contain;
+	height: 5px;
+	margin: 10px 40px 0 0;
+	width: 73px;
+    height: 25px;
+}
+.ico2 {
+	display: inline-block;
+	float: right;
+	 text-align: center;
+	/*background: url('../images/more.png') no-repeat;*/
+	background-size:contain;
+	width: 10px;
+	height: 5px;
+	margin: 10px 40px 0 0;
+	width: 73px;
+    height: 25px;
+}
+.left-blue{
+	display:inline-block;
+	float:left;
+	width:4px;
+	height:47px;
+	background:#307fe2;
+}
+.right-blue{
+	display:inline-block;
+	float:right;
+	width:4px;
+	height:47px;
+	background:#307fe2;
+}
+.right-black{
+	display:inline-block;
+	float:right;
+	width:1px;
+	height:47px;
+	background:#e5e5e5;
+}
+.left-black{
+	display:inline-block;
+	float:left;
+	width:1px;
+	height:47px;
+	background:#e5e5e5;
+}
+
+
+		.Bottomv{position:fixed;bottom:0px;width:98%}
+		</style>
+		<script>
+			$(document).ready(function(){
+				$("#jl").click(
+					function(){
+						$("#jls").show();						
+						$("#jys").hide();
+						$("#jl").css("color","#307fe2");
+						$("#jy").css("color","#212121");
+						$("#jl i").addClass("left-blue");
+						$("#jl i").removeClass("right-black");
+						$("#jy i").addClass("left-black");
+						$("#jy i").removeClass("right-blue");
+					}
+				);
+				$("#jy").click(
+					function(){
+						$("#jls").hide();						
+						$("#jys").show();
+						$("#jy").css("color","#307fe2");
+						$("#jl").css("color","#212121");
+						$("#jy i").addClass("right-blue");
+						$("#jy i").removeClass("left-black");
+						$("#jl i").addClass("right-black");
+						$("#jl i").removeClass("left-blue");
+					}
+				);
+			});
+		</script>	
+  
+	</head>
+   
+	<body>
+	 <if condition="$check['0']['ITEMNAME'] eq null" >暂未有您的数据<else/>
+		<div class="jl" id="jl">总检结论<i class="left-blue"></i></div><div class="jy" id="jy">总检建议<i class="left-black"></i></div>
+		<div class="jls" id="jls" style="border-bottom: 0px solid white;">	
+				<ul>
+				<?php foreach($check as $value){?>
+				<li style="list-style-type : disc;list-style-position : inside "><?php echo $value['ITEMNAME'].'_'.$value['DEPTNAME'];?></li>
+				<li><?php  if($value['CHECKITEMTYPE']=='0'){echo "检查项目";}if($value['CHECKITEMTYPE']=='1'){echo "医技项目";}if($value['CHECKITEMTYPE']=='2'){echo "化验项目";}if($value['CHECKITEMTYPE']=='3'){echo "其它项目";}?></li>
+				<li><?php echo $value['ITEMNAME'];?></li>
+				<li><?php if( is_array($value['CHECKVALUE'])){echo '';}else{ echo $value['CHECKVALUE'];}?></li>
+				<li><?php if( is_array($value['DEPTXJ'])){echo '';}else{ echo $value['DEPTXJ'];}?></li>
+				<li></li>
+				<?php }?>
+				</ul>
+			
+			
+		</div>
+		
+		
+		<div class="suggess" id="jys" style="display:none;">
+				<ul>
+					<?php foreach($check as $value){?>
+				<li style="list-style-type : disc;list-style-position : inside "><?php echo $value['ITEMNAME'].'_'.$value['DEPTNAME'];?></li>
+				<li><?php if( is_array($value['DEPTJY'])){echo '';}else{ echo $value['DEPTJY'];}?></li>
+				<li></li>
+				<?php }?>
+				</ul>
+		</div>
+		
+    </if>
+	</body>
+
+</html>

@@ -1,0 +1,36 @@
+<!DOCTYPE HTML>
+<html>
+
+	<head>
+		<meta charset="UTF-8" />
+		<meta name="viewport" content="width=device-width, user-scalable=0, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+		<link rel="stylesheet" type="text/css" href="/Resource/Ben/css/index.1.1.6.css" />
+		<title>个人详情</title>
+	</head>
+
+	<body>
+		<div class="cent">			
+			<div class="matter">
+				<ul>
+			
+				<li><span>头&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;像</span><span><img width="58" height="58" src="{$data.imgPath}"/></span>
+					<li><span>姓&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;名</span><span>{$data.name}</span>
+					</li>
+					<li><span>疗 养 号</span><span>{$data.lyh}</span>
+					</li>
+					<li><span>性&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;别</span><span><if condition="$data.sex eq '1' ">男<elseif condition="$data.sex eq '2' "/>女<else/>无</if></span>
+					</li>
+					<li><span>年&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;龄</span><span>{$data.age}</span>
+					</li>
+					<li><span>身份证号</span><span>{$data.cardID}</span>
+					</li>
+					<li><span>手  机  号</span><span>{$data.phone}</span>
+					</li>
+				
+				</ul>
+			</div>
+
+		</div>
+	</body>
+
+</html>

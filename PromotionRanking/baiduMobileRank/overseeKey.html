@@ -1,0 +1,182 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" /> 
+	<title>关键词排名查询</title>
+<link rel="stylesheet" href="http://cdn.bootcss.com/bootstrap/3.2.0/css/bootstrap.min.css">
+<script src="http://libs.baidu.com/jquery/2.0.0/jquery.min.js"></script>
+<style>
+body{/* fallback */
+			background-color:#5cb85c;
+			/* chrome 2+, safari 4+; multiple color stops */
+			background-image:-webkit-gradient(linear,left bottom,left top,color-stop(0.32,#080A3e),color-stop(0.66,#102c7d), color-stop(0.83,#5cb85c));
+			/* chrome 10+, safari 5.1+ */
+			background-image:-webkit-linear-gradient(#080A3e, #5cb85c);
+			/* firefox; multiple color stops */
+			background-image:-moz-linear-gradient(top,#080A3e, #5cb85c);
+			/* ie 6+ */
+			filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#063053', endColorstr='#5cb85c');
+			/* ie8 + */
+			-ms-filter: "progid:DXImageTransform.Microsoft.gradient(startColorstr='#063053', endColorstr='#5cb85c')";
+			/* ie10 */
+			background-image: -ms-linear-gradient(#080A3e, #5cb85c);
+			/* opera 11.1 */
+			background-image: -o-linear-gradient(#080A3e, #5cb85c);
+			/* The "standard" */
+			background-image: linear-gradient(#080A3e, #5cb85c);
+  /*overflow: hidden;*/
+}
+
+.header{margin:auto;margin-top:4%;width:87%;color:#fff;}
+.header p{font-size: 18px;}
+.content{margin:auto;min-height:600px;width:90%;color:#fff;margin-bottom: 14px;}
+.form-control{width:100%;}
+.pull-left{    margin-left: 20px;padding: 0;border-radius: 6px;-webkit-border-radius: 6px;-moz-border-radius: 6px;-ms-border-radius: 6px;line-height:30px;background-color: #38bbff;}
+.pull-left p{padding-left: 10px;}
+.pull-left p span{color:#fefefe ;}
+.submit{margin:20px;width: 20%;height: 40px;letter-spacing: 10px;font-size: 20px;border-radius: 15px;-webkit-border-radius: 15px;-moz-border-radius: 15px;-ms-border-radius: 15px;border: 1px solid rgba(255,255,255,0.25);color: rgba(255,255,255,0.5);background-color: rgba(255,255,255,0.05);}
+#submit:hover{background-color: #fff;color: #31708f;font-weight: 800;font-size: 24px;}
+table {border: 2px solid rgba(255,255,255,0.4);}
+table th,table td {width: 4%;height:38px;text-align: center;}
+#ts {color: #000;}
+
+
+.footer{    margin-top: 15px;border-top: 1px solid rgba(255,255,255,0.3);height: 68px; width: 90%; margin: auto;color: #fff;}
+.contect{text-align: center;height: 50px;line-height: 50px;}
+.footer ul li{float: left;width: 25%;height:40px;}
+
+</style>
+</head>
+<body>
+
+<div class="header">
+	<div class="row-fluid">
+		<div class="span12">
+		<h1>关键词监控<h1>
+		<p>监视时间以分钟为单位</p>
+		</div>
+	</div>
+</div>
+
+<div class="content">
+<form action="#" method="post" onsubmit="return false;">
+	<div class="pull-left col-md-4" >
+	<p>输入关键词,格式:<span class="text-danger">关键词,金额(如果填写则估算排名价格)-换行</span></p>
+	<textarea class="form-control" id="keywords"  name="keywords" style="height:100px;" ></textarea>
+	</div>
+	<div class="pull-left col-md-4" ><p>输入展示URL:<span class="text-danger">URL-换行</span></p>
+	<textarea class="form-control" id="urls" name="urls" style="height:100px;"  ></textarea>
+	</div>
+
+	<div class="pull-left col-md-1" ><p>监视时间(分钟)</p>
+	<textarea class="form-control" id="monitortime" name="monitortime" style="height:100px;" ></textarea>
+	</div>
+
+	<div class="pull-left col-md-1" ><p>警报率(百分比)</p>
+	<textarea class="form-control" id="alarmnumber" name="alarmnumber" style="height:100px;" ></textarea>
+	</div>
+
+	<div class="pull-left col-md-1" ><p>推送人</p>
+	<select name="ts" id="ts" style="height: 30px;width: 100%;">
+								<option value="0">选择推送人</option>								
+								<option value="5">-- ben --</option>
+							</select>
+	</div>
+
+
+
+	<div class="clearfix"></div>
+
+	<input type="submit" name="submit" class="submit" value="单词监控" onclick="myFunction(1)" />
+	<input type="submit" name="submit" class="submit" value="多词检测" onclick="myFunction(0)" />
+
+</form>
+
+<table border="" cellspacing="" cellpadding="" id="average">
+	<tr><th rowspan="5">平均监控</th><th>url</th><th>展现排名</th><th>展现率</th></tr>	
+</table>
+<br />
+<table border="" cellspacing="" cellpadding="" id="once">
+	<tr><th rowspan="5">最近一次</th><th>url</th><th>排名</th></tr>	
+</table>
+
+
+</div>
+<div class="footer">
+	<br />
+		<ul>
+			<li href="#" target="_blank">作者:benhuang && amy0724</li>
+			<li href="#" target="_blank">E-mail:benhuang1024@163.com</li>		
+		</ul>
+</div>
+
+<script type="text/javascript">
+
+function pull(){		
+	$.ajax({
+        type:'post',
+        async:true,
+        url:'overseeKey.php',        
+        data:{keywords:keywords,ismonitor:ismonitor,urls:urls,alarmnumber:alarmnumber,ts:ts}, //
+        success:function(runval){         	
+        	$(".add-dom").remove();        	
+			objVal = jQuery.parseJSON(runval);			
+			$.each(objVal,function(key,val){	
+				if(isNaN(sumall['sums'])){
+					sumall['sums']=1;					
+				}else{
+					sumall['sums'] += 1;					
+				}				
+				var addDom = '<tr class="add-dom"><td>'+val['url']+'</td><td>'+val['rank']+'</td</tr>';
+				$("#once").append(addDom);
+				if(-1 != jQuery.inArray(val['url'],urlArr)){
+					var repUrl = val['url'].replace(/\./g,'');
+					var thisDom = 'add-'+repUrl;
+					var thisDomClass = '.add-'+repUrl;					
+					var ave = new Array();					
+					$(thisDomClass).remove();					
+					if(overall[repUrl]>1){						
+						ave['rank'] = (overall[repUrl] + val['rank'])/2;	
+					}else{
+						ave['rank'] = val['rank'];						
+					}
+					if(isNaN(sumall[repUrl])){
+						sumall[repUrl]=1;					
+					}else{
+						sumall[repUrl] += 1;					
+					}					
+					var remainder = sumall[repUrl]/sumall['sums'];					
+					overall[repUrl] =  ave['rank'];
+					var addaveDom = '<tr class="'+thisDom+'"><td>'+val['url']+'</td><td>'+ave['rank'].toFixed(2)+'</td><td>'+remainder.toFixed(2)+'</td></tr>';
+					$("#average").append(addaveDom);
+				}
+				
+				
+			});			
+			setTimeout("pull()",monitortimes);
+        },
+        error:function(){
+        	alert('you have a error');
+        }        
+    });
+}
+	
+function myFunction(getis){
+	ismonitor = getis;
+	keywords = $.trim($("#keywords").val());
+	urls = $.trim($("#urls").val());
+	alarmnumber = $.trim($("#alarmnumber").val());	
+	var monitortime = $.trim($("#monitortime").val());
+	monitortimes = monitortime*60*1000;	
+	ts = $("#ts").val();
+	urlArr = urls.split("\n");	
+	overall = new Array();
+	sumall = new Array();	
+	pull();	
+	return false;
+}
+
+ 
+</script>
+</body>
+</html>

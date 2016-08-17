@@ -1,0 +1,196 @@
+<!doctype html>
+<html>
+<head>
+<meta charset="utf-8">
+<title>我的报告</title>
+<meta name="Keywords" content="">
+<meta name="Description" content="">
+<!-- 移动设备支持 -->
+<meta content="text/html; charset=UTF-8" http-equiv="Content-Type">
+<meta content="width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no" name="viewport">
+<meta content="no-cache,must-revalidate" http-equiv="Cache-Control">
+<meta content="no-cache" http-equiv="pragma">
+<meta content="0" http-equiv="expires">
+<meta content="telephone=no, address=no" name="format-detection">
+<meta name="apple-mobile-web-app-capable" content="yes"> 
+<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+
+<style type="text/css">
+	*
+	{
+	   margin: 0;
+       outline: 0;
+       padding: 0;
+	}
+	a,button,input
+	{
+	  -webkit-tap-highlight-color:rgba(255,0,0,0)
+	}
+	.clear
+	{
+		clear:both;
+	}
+	.main
+	{
+		width:100%;
+		min-width:300px;
+        max-width:640px;
+	    height:800px; 
+	    margin:0 auto;
+		background: #eee;
+	}	
+     ul,li
+	  { 
+	  list-style:none;
+	  }
+    .li1
+	{	
+	    width:95%;	 
+        height:38px;
+		float:left;
+	    line-height:38px;
+		text-align:center;
+		background:#ffffff;
+		font-size:14px;
+	    color:rgb(49,127,225);
+	}
+	.linone{
+		width:100%;
+		height:38px;
+		float:left;
+		line-height:38px;
+		text-align:center;
+		background:#ffffff;
+		font-size:14px;
+		color:rgb(49,127,225);
+	}
+	.li2
+	{	
+	    width:5%;	 
+        height:38px;
+		float:left;
+		background:#ffffff;
+	}
+  .ctn 
+  {
+  	  width:100%;
+	  min-width:300px;
+      max-width:640px;
+	  height:auto;
+	  font-size:16px;
+	  color:rgb(33,34,36);
+  }
+  .xian{
+  	width:90%;
+	background:#ffffff;
+	color:rgb(33,34,36);
+  }
+  .ul1{
+  	width:100%;
+  }
+  .li3{
+  	width:30%;
+	height:40px;
+	line-height:40px;
+    text-align:right;
+	float:left;
+  }
+  .li4{
+  	width:60%;
+	float:left;
+	height:40px;
+	padding-left:14px;
+	line-height:40px;
+  }
+   .li5{
+  	width:30%;
+	padding-top:20px;
+    text-align:right;
+	float:left;
+  }
+  .li6{
+  	width:60%;
+	padding-top:20px;
+	float:left;
+	padding-left:14px;
+  }
+   .li7{
+   	width:43%;
+	padding-top:20px;
+	float:left;
+	padding-left:14px;
+  }
+  .li8{
+    width:12%;
+	float:right;
+  }
+  
+</style>
+<script type="text/javascript">
+function aa(){
+        
+   var obj = document.getElementById("xs");
+        obj.style.display = "none";
+   
+        
+}
+</script>
+</head>
+<body>
+    <div>
+	<img   src="/Resource/zhang/ing.png" style="max-width: 100%;height: auto;width: auto\9;">
+	</div>
+	<div class="main">
+		<div class="ttl" id="xs">
+		  <ul>
+           <li class="li1">友情提醒:只能查看一年内的体检报告</li>
+		   <li class="li2" ><img  onclick="aa();" src="/Resource/zhang/x.png"></li>
+		   <div class="clear"></div>
+          </ul>
+		</div>
+		<br />
+		<?php  foreach($xmls as $xml){?>
+		<?php if(empty($xml['CHECKDATE'])){echo '<li class="linone" style="color: #f00">暂无您的报告</li>';} ?>
+        <div style="width:100%;height:30px;<?php  if( empty($xml['CHECKDATE'])){ echo 'display:none;';}?></div>
+       <div class="ctn">
+          <div id="ctn1">
+		   <a  href=<?php  if( empty($xml['CHECKDATE'])){ echo '"#"';}else{ echo '"/index.php?s=/addon/Myreport/Myreport/consumptionno.html"';}?>>
+           	<div class="xian" style="margin:0 auto;border-left: 4px solid rgb(49,127,225);">
+           		
+            <ul class="ul1">
+            	<li class="li5">报告编码：</li>
+				<li class="li6"><?php echo $xml['INHOSPNO'];?></li>
+				<div class="clear"></div>
+            </ul>
+			<ul>
+            	<li class="li5">报告名称：</li>
+				<li class="li6"><?php if($yytc=='0'){ echo "A套餐";}elseif($yytc=='1'){ echo "B套餐";}elseif($yytc=='2'){ echo "C套餐";}elseif($yytc=='3'){ echo "VIP套餐";}elseif($yytc=='4'){ echo "基本套餐";}else{ echo "无";}?></li>
+				
+				<div class="clear"></div>
+            </ul>
+			<ul>
+            	<li class="li5">体检时间：</li>
+				<li class="li7"><?php if( empty($xml['CHECKDATE'])){ echo "无";}else{ echo $xml['CHECKDATE'];}?></li>
+				<li class="li8"><img width="6px" height="12px"  src="/Resource/Ben/img/ico_right_new.png"/></li>
+				<div class="clear"></div>
+            </ul>
+			<ul>
+            	<li class="li5">报告状态：</li>
+				<li class="li6"><?php  if( empty($xml['CHECKDATE'])){ echo "未完成";}else{ echo "已完成";}?></li>
+				<div class="clear"></div>
+            </ul>
+			<ul>
+            	<li class="li5"></li>
+				<li class="li6"></li>
+				<div class="clear"></div>
+            </ul>
+			
+			</div>
+			 </a>
+		  </div>
+
+		  <?php }?>
+       </div>
+	</div>
+</body>
+</html>

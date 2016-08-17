@@ -1,0 +1,187 @@
+<!doctype html>
+<html>
+<head>
+<meta charset="utf-8">
+<title>预约详情</title>
+<meta name="Keywords" content="">
+<meta name="Description" content="">
+<!-- 移动设备支持 -->
+<meta content="text/html; charset=UTF-8" http-equiv="Content-Type">
+<meta content="width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no" name="viewport">
+<meta content="no-cache,must-revalidate" http-equiv="Cache-Control">
+<meta content="no-cache" http-equiv="pragma">
+<meta content="0" http-equiv="expires">
+<meta content="telephone=no, address=no" name="format-detection">
+<meta name="apple-mobile-web-app-capable" content="yes"> 
+<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+
+<style type="text/css">
+	*
+	{
+	   margin: 0;
+       outline: 0;
+       padding: 0;
+	}
+	a,button,input
+	{
+	  -webkit-tap-highlight-color:rgba(255,0,0,0)
+	}
+	.clear
+	{
+		clear:both;
+	}
+	.main
+	{
+		width:100%;
+		min-width:300px;
+        max-width:640px;
+	    height:auto; 
+	    margin:0 auto;
+		background:rgb(244,245,247);
+	}	
+     ul,li
+	  { 
+	  list-style:none;
+	  }
+    .li1
+	{	
+	    width:95%;	 
+        height:38px;
+		float:left;
+	    line-height:38px;
+		text-align:center;
+		background:#ffffff;
+		font-size:14px;
+	    color:rgb(49,127,225);
+	}
+	.li2
+	{	
+	    width:5%;	 
+        height:38px;
+		float:left;
+		background:#ffffff;
+	}
+  .ctn 
+  {
+  	  width:100%;
+	  min-width:300px;
+      max-width:640px;
+	  height:auto;
+	  font-size:16px;
+	  color:rgb(33,34,36);
+  }
+  .xian{
+  	width:90%;
+	background:#ffffff;
+	color:rgb(33,34,36);
+  }
+  .ul1{
+  	width:100%;
+  }
+  .li3{
+  	width:35%;
+	height:40px;
+	line-height:40px;
+    text-align:right;
+	float:left;
+  }
+  .li4{
+  	width:55%;
+	float:left;
+	height:40px;
+	padding-left:10%;
+	line-height:40px;
+  }
+   .li5{
+  	width:30%;
+	padding-top:17px;
+    text-align:right;
+	float:left;
+  }
+  .li6{
+  	width:60%;
+	padding-top:17px;
+	float:left;
+	padding-left:14px;;
+  }
+   .li7{
+   	width:43%;
+	padding-top:20px;
+	float:left;
+	padding-left:10%;
+  }
+  .li8{
+    width:12%;
+	float:left;
+  }
+  
+</style>
+</head>
+<body>
+    <div>
+	<img   src="/Resource/zhang/ing.png" style="max-width: 100%;height: auto;width: auto\9;">
+	</div>
+	<div class="main">
+	 <volist name="datas" id="vo" >
+      <div style="width:100%;height:20px;"></div>
+       <div class="ctn">
+
+          <div id="ctn1">
+		 
+           	<div class="xian" style="margin:0 auto;<?php  if(($vo[ostuats] == '1')){ echo 'border-left: 4px solid  rgb(129,194,106);';}else{ echo 'border-left: 4px solid rgb(49,127,225);';}?>">
+           		
+            <ul class="ul1">
+            	<li class="li5">预约编号:</li>
+				<li class="li6">{$vo.id}</li>
+				<div class="clear"></div>
+            </ul>
+			<ul>
+            	<li class="li5">预约套餐:</li>
+				<li class="li6"><?php if($vo[yytc] == '1'){ echo 'A';  } if($vo[yytc] == '2'){ echo 'B';  } if($vo[yytc] == '3'){ echo 'C';  } if($vo[yytc] == '4'){ echo 'VIP';  } if($vo[yytc] == '0'){ echo '基本';  }   ?>套餐</li>
+				
+				<div class="clear"></div>
+            </ul>
+			<?php if($vo['yyad'] >= 0){
+
+					 $yyadTab = array('妇科疾病筛查','乳腺疾病筛查','心血管辅助检查','骨质疏松相关检查','男性疾病筛查','胃部检查项目','外科新增项目','物理诊断新增项目');
+
+				 $yyads = explode(',',$vo[yyad]);
+				if($vo['yyad'] || $vo[yyad][0] == 0 && $vo[yyad][0] != null){
+				 echo '<ul><li class="li5">附加套餐:</li><li class="li6">';
+
+				 foreach($yyads as $keyy=>$valuey){
+										echo $yyadTab["$valuey"];echo '&nbsp;';
+									}
+
+				echo '</li><div class="clear"></div></ul>';
+				}
+			} ?>
+		    <ul>
+            	<li class="li5">预约人数:</li>
+				<li class="li6">{$vo.yysum}</li>
+				<div class="clear"></div>
+            </ul>
+			<ul>
+            	<li class="li5">预约时间:</li>
+				<li class="li6">{$vo.yydata}</li>
+				<div class="clear"></div>
+            </ul>
+			<ul>
+            	<li class="li5">审核结果:</li>
+				<li class="li6"><?php if($vo[ostuats] == '1'){ echo '审核通过';  }else{echo '审核中';} ?></li>
+				<div class="clear"></div>
+            </ul>
+			<ul>
+            	<li class="li5"></li>
+				<li class="li6"></li>
+				<div class="clear"></div>
+            </ul>
+			
+			</div>
+			
+		  </div>
+       </div>
+	   </volist>
+	</div>
+</body>
+</html>

@@ -1,0 +1,89 @@
+<!DOCTYPE HTML>
+<html>
+	<head>
+		<meta charset="UTF-8" />
+		<meta name="viewport" content="width=device-width, user-scalable=0, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+		<style type="text/css">
+			* {
+				margin: 0;
+				padding: 0;
+			}
+			body{width:100%;min-height:368px;background:#f3f5f6;font-family:'微软雅黑';}
+			a {
+				text-transform: none;
+				text-decoration: none;
+				color: #000;
+			}
+			a:hover {
+				text-transform: none;
+				text-decoration: none;
+				color: #000;
+			}
+			li {
+				list-style: none;
+			}
+			
+			.checkout {
+				display: inline-block;				
+			}
+			.checkout li {
+				font-size: 14px;
+				background:#fff;
+				overflow:hidden;
+				float: left;
+				display: block;
+				width: 98%;
+				height: 45px;
+				line-height: 45px;
+				margin-bottom:10px;
+				border:1px solid #EAEAEA;
+			}
+			.checkout li a{
+				display:inline-block;
+				width:82%;
+				padding:0 10% 0 8%;			
+			}
+			.checkout li a span{
+				color: #2f2f2f;
+				float:left;
+				display:inline-block;
+				width:85%;
+				height:45px;
+				overflow:hidden;
+			}
+			
+			.checkout li:nth-child(n+2){
+				border-left:4px solid #307fe2;
+			}
+			.blue{
+				color:#307fe2!important;
+			}
+			.ico_right_new {
+				
+				display: inline-block;
+				vertical-align: middle;	
+				margin-left: 10%;
+				width: 6px;
+				height: 12px;
+				background: url(/Resource/Ben/img/ico_right_new.png) no-repeat;
+				background-size:contain;
+			}
+			
+		</style>
+		<title>检验报告</title>
+	</head>
+
+	<body>
+		<div class="content">	
+			<ul class="checkout">
+				<li ><a href="{:U('/addon/Heart/Heart/checkf2')}" ><span class="blue">只看异常项</span><i class="ico_right_new"></i></a>
+				</li>
+				<volist name="reports" id="vo" >
+				<li><a href="{:U("/addon/Heart/Heart/checks/checkname/$vo[CHECKITEMNAME]")}" ><span>{$vo.ITEMNAME}_{$vo.CHECKITEMNAME}</span><i class="ico_right_new"></i></a>
+				</li>
+				</volist>
+			</ul>
+		</div>
+	</body>
+
+</html>

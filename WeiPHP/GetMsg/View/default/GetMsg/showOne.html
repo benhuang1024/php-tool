@@ -1,0 +1,56 @@
+<!doctype html>
+<html>
+
+	<head>
+		<meta charset="utf-8">
+		<meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0, user-scalable=yes" />
+		<title>挂号信息</title>
+		<link rel="stylesheet" href="benhuang/css/showOne1.4.css" type="text/css" />
+	</head>
+
+	<body>
+
+		<volist name="showOneRes" id="sub">
+			<table border="" cellspacing="" cellpadding="">
+				<tr>
+					<td>发病时间:</td>
+					<td>{$sub.onset}</td>
+				</tr>
+				<tr>
+					<td>主要症状:</td>
+					<td>{$sub.symptom}</td>
+				</tr>
+				<tr>
+					<td>就诊经历:</td>
+					<td>{$sub.experience}</td>
+				</tr>
+				<tr>
+					<td>想得到什么帮助:</td>
+					<td>{$sub.need}</td>
+				</tr>
+			</table>
+		
+		<div class="reply">
+			<p><span class="m-r"></span><span class="color-blue">{$sub.doctor}</span><span>{$sub.time}</span>
+				<span class="bg-icon">
+					
+				</span>
+			</p>
+			<div class="reply-res">{$sub.reply}
+				<!-- <div class="slash-left">
+
+				</div>
+				<div class="slash-right">
+
+				</div>
+				<div class="slash-none">
+
+				</div> -->
+
+				</span>
+			</div>
+		</div>
+		</volist>
+	</body>
+
+</html>

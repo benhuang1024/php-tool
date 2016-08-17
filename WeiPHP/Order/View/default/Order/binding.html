@@ -1,0 +1,291 @@
+<!DOCTYPE html>
+<html lang="zh-cn">
+<head>
+<meta charset="utf-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge"/>
+<meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no"/>
+<title>绑定微信号</title>
+<link rel="stylesheet" type="text/css" href="Resource/tzj/css/binding_3.0.css">
+	<style>
+		.content table tr{
+			height: 60px;
+		}
+	</style>
+<script src="public/static/jquery-2.0.3.min.js"></script>
+
+<script type="text/javascript">
+function button_binding_s(){
+    document.getElementById("button_binding").setAttribute("type", "submit");
+	var name = $('#name').val().trim();
+ 	var order_id = $('#order_id').val().trim();
+ 	var adid = $('#adid').val().trim();
+ 	var agree = document.getElementById("agree").checked
+ 	if(!agree){
+ 		showInfo("请确认协议",'警告');
+ 	 	return false;
+ 	}
+ 	
+ 	if (!order_id) {
+ 	 	showInfo("请输入您的疗养号",'警告');
+ 	 	return false;
+ 	};
+ 	if (!name) {
+ 	 	showInfo("请输入您的姓名",'警告');
+ 	 	return false;
+ 	};
+ 	var num_text = /^(.){6}$/;
+ 	if (!adid||!(num_text.test(adid))) {
+ 		showInfo("请正确输入您的身份证后6位数字",'警告');
+ 		return false;
+ 	};
+ 	$("#sucess_order").click();
+	document.forms[0].submit();
+
+}
+function detectMacXFF() {
+	var userAgent = navigator.userAgent.toLowerCase();
+	if(userAgent.indexOf("mac") != -1 && userAgent.indexOf("firefox") != -1) {
+		return true;
+	}
+}
+
+function in_array(needle, haystack) {
+	if(typeof needle == "string" || typeof needle == "number") {
+		for(var i in haystack) {
+			if(haystack[i] == needle) {
+				return true;
+			}
+		}
+	}
+	return false;
+}
+
+function sd_load(sd_width) {
+	if(sd_width) {
+		$("#SD_window").css("width", sd_width + "px");
+	}
+	var sd_top = ($(window).height() - $("#SD_window").height()) / 3 + $(document).scrollTop();
+	if(sd_top < 0) {
+		sd_top = 0;
+	}
+	var sd_left = ($(window).width() - $("#SD_window").width()) / 2;
+	if(sd_left < 0) {
+		sd_left = 0;
+	}
+	$("#SD_window").css("top", sd_top);
+	$("#SD_window").css("left", sd_left);
+}
+
+function sd_remove() {
+	$("#SD_close,#SD_cancel,#SD_confirm").unbind("click");
+	$("#SD_window,#SD_overlay,#SD_HideSelect").remove();
+	if(typeof document.body.style.maxHeight == "undefined") {
+		$("body","html").css({height: "auto", width: "auto"});
+	}
+}
+
+function showDialog(mode, msg, t, sd_width) {
+	var sd_width = sd_width ? sd_width : 290;
+	var mode = in_array(mode, ['confirm', 'window', 'info', 'loading']) ? mode : 'alert';
+	var t = t ? t : "提交";
+	var msg = msg ? msg : "";
+	var confirmtxt = confirmtxt ? confirmtxt : "确定";
+	var canceltxt = canceltxt ? canceltxt : "取消";
+	sd_remove();
+	try {
+		if(typeof document.body.style.maxHeight === "undefined") {
+			$("body","html").css({height: "100%", width: "100%"});
+			if(document.getElementById("SD_HideSelect") === null) {
+				$("body").append("<iframe id='SD_HideSelect'></iframe><div id='SD_overlay'></div>");
+			}
+		} else {
+			if(document.getElementById("SD_overlay") === null) {
+				$("body").append("<div id='SD_overlay'></div>");
+			}
+		}
+		if(mode == "alert") {
+			if(detectMacXFF()) {
+				$("#SD_overlay").addClass("SD_overlayMacFFBGHack");
+			} else {
+				$("#SD_overlay").addClass("SD_overlayBG");
+			}
+		} else {
+			if(detectMacXFF()) {
+				$("#SD_overlay").addClass("SD_overlayMacFFBGHack2");
+			} else {
+				$("#SD_overlay").addClass("SD_overlayBG2");
+			}
+		}
+		$("body").append("<div id='SD_window'></div>");
+		var SD_html;
+		SD_html = "";
+		SD_html += "<table cellspacing='0' cellpadding='0'><tbody><tr><td class='SD_bg'></td><td class='SD_bg'></td><td class='SD_bg'></td></tr>";
+		SD_html += "<tr><td class='SD_bg'></td>";
+		SD_html += "<td id='SD_container'>";
+		SD_html += "<h3 id='SD_title'>" + t + "</h3>";
+		SD_html += "<div id='SD_body'><div id='SD_content'>" + msg + "</div></div>";
+		SD_html += "<div id='SD_button'><div class='SD_button'>";
+		//SD_html += "<a id='SD_confirm'>" + confirmtxt + "</a>";
+		//SD_html += "<a id='SD_cancel'>" + canceltxt + "</a>";
+		SD_html += "</div></div>";
+		//SD_html += "<a href='javascript:;' id='SD_close' title='关闭'></a>";
+		SD_html += "</td>";
+		SD_html += "<td class='SD_bg'></td></tr>";
+		SD_html += "<tr><td class='SD_bg'></td><td class='SD_bg'></td><td class='SD_bg'></td></tr></tbody></table>";
+		$("#SD_window").append(SD_html);
+		$("#SD_confirm,#SD_cancel,#SD_close,#SD_window").bind("click", function(){
+			sd_remove();
+		});
+		if(mode == "info" || mode == "alert") {
+			$("#SD_cancel").hide();
+			$("#SD_button").show();
+		}
+		if(mode == "window") {
+			//$("#SD_close").show();
+		}
+		if(mode == "confirm") {
+			$("#SD_button").show();
+		}
+		var sd_move = false;
+		var sd_x, sd_y;
+		$("#SD_container > h3").click(function(){}).mousedown(function(e){
+			sd_move = true;
+			sd_x = e.pageX - parseInt($("#SD_window").css("left"));
+			sd_y = e.pageY - parseInt($("#SD_window").css("top"));
+		});
+		$(document).mousemove(function(e){
+			if(sd_move){
+				var x = e.pageX - sd_x;
+				var y = e.pageY - sd_y;
+				$("#SD_window").css({left:x, top:y});
+			}
+		}).mouseup(function(){
+			sd_move = false;
+		});
+		$("#SD_body").width(sd_width - 50);
+		sd_load(sd_width);
+		$("#SD_window").show();
+		$("#SD_window").focus();
+	} catch(e) {
+		alert("System Error !");
+	}
+}
+
+function showInfo(msg,t, fn, timeout) {
+	showDialog("info", msg,t);
+	$("#SD_confirm").unbind("click");
+	if(fn && timeout) {
+		st = setTimeout(function(){
+			sd_remove();
+			fn();
+		}, timeout * 1000);
+	}
+	$("#SD_confirm").bind("click", function(){
+		if(timeout) {
+			clearTimeout(st);
+		}
+		sd_remove();
+		if(fn) {
+			fn();
+		}
+	});
+}
+
+
+function showConfirm(msg, fn) {
+	showDialog("confirm", msg);
+	$("#SD_confirm").unbind("click");
+	$("#SD_confirm").bind("click", function(){
+		if(fn) {
+			fn();
+		}
+	});
+}
+
+</script>
+<style>
+.ipnts{
+	font-size: 18px;
+	width:93%;
+   border-style:none;
+   background-color: #f3f5f6;
+   height:35px;
+   line-height:35px;
+   padding-left:40px;
+}
+tr{
+   border-bottom:1px solid RGB(198,217,242);
+}
+.footer_button{
+   text-align:center;
+}
+.td-br{
+	font-size: 14px;padding:30px 0 0 9px;
+}
+
+@media  screen  and (max-width: 320px) {
+	.td-br{
+		padding:42px 0 0 9px;
+	}
+}
+</style>
+</head>
+<body >
+    <div>
+   
+<form action="{$url_add}"method="post"> 
+	<div>
+        <div style='height:100%;width:100%;margin-left: auto;margin-right: auto;text-align: center;margin-top:35px'><img src="Resource/tzj/images/logo.png?1" style="width:165px;height:150px;" ></div>
+    </div>
+	
+    <div class="content" style="margin-top:30px;border:0px;background-color: #f3f5f6;">
+		
+			<TABLE style="BORDER-COLLAPSE: collapse;" borderColor="#dadada" height=40 cellPadding=0 width=90% align=center border=0>
+				<TBODY>
+					<TR>
+					    <TD>
+							<img src="Resource/tzj/images/ssss/xing.png?1" width="17px" height="16px"/>			
+						</TD>
+						<TD>
+							<input type="text" id="order_id"name="order_id" class="ipnts" placeholder="请填写您的疗养号" style="border:0"/>			
+						</TD>
+					</TR>
+					<TR>
+					    <TD>
+							<img src="Resource/tzj/images/ssss/name.png?1"  width="17px" height="15px"/>			
+						</TD>
+						<TD>
+							<input type="text" id="name"name="name" class="ipnts" placeholder="请填写您的姓名" style="border:0"/>			
+						</TD>
+					</TR>
+					<TR>
+					    <TD>
+							<img src="Resource/tzj/images/ssss/idcard.png?1" width="17px" height="15px"/>			
+						</TD>
+						<TD>
+							<input type="text" id="adid"name="adid"  class="ipnts" placeholder="请填写您的身份证后6位"style="border:0"/>			
+						</TD>
+					</TR>
+					<tr style="border-bottom:0;height: 80px;margin: 5px 0;text-align: left;">
+						<td><input type="checkbox" name="agree" id="agree" value="" required="required"  checked="checked"/></td>
+						<td class="td-br" >
+							<span class="" style="color:#307FE2">
+								本人同意预约和体检信息通过互联网进行传输。友情提醒：网络有风险，但我们将尽最大努力保障您的信息安全！
+							</span>
+						</td>
+						
+					</tr>
+				</TBODY>
+			</TABLE>
+		<input type="bottom" style="margin-top:60px;width: 90%" value="提交" class="footer_button" id="button_binding" onClick="return button_binding_s();"/>
+      <!-- <button class="footer_button"id="button_binding">绑定</button>-->
+      
+	</div>
+  </form>  
+   </div>
+	<div class="order_ture">
+		<div id="sucess_order"onclick='showInfo("绑定中...");'></div>
+		<div id="faile_order"onclick='showInfo("您填写的信息与后台信息不符，请重新填写。<br /> 如有不清楚的地方，可以拨打我们的客服热线0510-82335000<br />建议您重新绑定！","绑定失败");'></div>
+    </div>
+</body>
+</html>
