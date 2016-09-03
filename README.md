@@ -1,6 +1,8 @@
 功能基于php开发
 # [DedeCMS](DedeCMS):
 动态调用dedecms的list和article页面
+####[upd_table_char](DedeCMS/upd_table_char.php):修改所有数据库字段中字符串
+
 # [Gathering](Gathering):采集单页面工具
 v2.1 注释采集错误
 采集单页面,转换相对路径,打包下载
