@@ -1,26 +1,26 @@
 <?php
-$dbms='mysql';     //Êı¾İ¿âÀàĞÍ
-$host='localhost'; //Êı¾İ¿âÖ÷»úÃû
-$user='root';      //Êı¾İ¿âÁ¬½ÓÓÃ»§Ãû
+$dbms='mysql';     //æ•°æ®åº“ç±»å‹
+$host='localhost'; //æ•°æ®åº“ä¸»æœºå
+$user='root';      //æ•°æ®åº“è¿æ¥ç”¨æˆ·å
 $pass='blog.benhuang1024.com';          
 $rpfield = 'body'; // update table char		
 $tostring = ''; //	
 $sql_arr = array(table1,table2);
-$rpstring_arr = array('Î¥¹æ´Ê1','Î¥¹æ´Ê2');
+$rpstring_arr = array('è¿è§„è¯1','è¿è§„è¯2');
 foreach($rpstring_arr as $rpstring_one){	
 $rpstring = $rpstring_one;
 	foreach($sql_arr as $sql_one){
 			$mysqli = new MySQLi($host,$user,$pass,$sql_one);	
 			$mysqli->query("set names UTF8");										
-			$exptable_obj = $mysqli->query("show tables like '%_addonarticle'");	// »ñÈ¡±í			 			
+			$exptable_obj = $mysqli->query("show tables like '%_addonarticle'");	// è·å–è¡¨(å†…å®¹è¡¨,æ ‡ç­¾è¡¨)			 			
 			 $exptable = mysqli_fetch_array($exptable_obj);
 			$exptable = $exptable[0];			
 			$rs = $mysqli->query("UPDATE $exptable SET $rpfield=REPLACE($rpfield,'$rpstring','$tostring')");
 			$mysqli->query("OPTIMIZE TABLE `$exptable`");					
 			if($rs){
-				echo $sql_one."³É¹¦Íê³É&nbsp;".$rpstring."&nbsp;Êı¾İÌæ»»!<br />";		
+				echo $sql_one."æˆåŠŸå®Œæˆ&nbsp;".$rpstring."&nbsp;æ•°æ®æ›¿æ¢!<br />";		
 			}else{
-				echo $sql_one."ÖĞÊı¾İ&nbsp;".$rpstring."&nbsp;Ìæ»»Ê§°Ü£¡<br />";		
+				echo $sql_one."ä¸­æ•°æ®&nbsp;".$rpstring."&nbsp;æ›¿æ¢å¤±è´¥ï¼<br />";		
 			}
 			$mysqli->close();				
 	}
