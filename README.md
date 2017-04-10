@@ -12,7 +12,7 @@ v2.1 注释采集错误
 
 # PromotionRanking:竞价排名工具
 ####[baiduMobileRank](PromotionRanking/baiduMobileRank)
-> - search:百度竞价排名查询
+> - search:竞价排名查询
 > - overseeKey:关键词监控,微信推送
 
 # SQL
