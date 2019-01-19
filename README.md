@@ -11,7 +11,7 @@ v2.1 注释采集错误
 # Monitor:性能监视
 
 # PromotionRanking:竞价排名工具
-####[baiduMobileRank](PromotionRanking/baiduMobileRank)
+#### [baiduMobileRank](PromotionRanking/baiduMobileRank)
 > - search:竞价排名查询
 > - overseeKey:关键词监控,微信推送
 
